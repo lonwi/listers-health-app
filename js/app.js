@@ -1,10 +1,13 @@
 (function () {
 	'use strict';
 	
-	angular.module('listershealth', ['ionic', 'listershealth.controllers'])
+	angular.module('listershealth', ['ionic','ionic.service.core', 'ionic.service.analytics', 'listershealth.controllers', 'listershealth.services'])
 	
-	.run(function($ionicPlatform) {
+	.run(function($ionicPlatform, $ionicAnalytics) {
 		$ionicPlatform.ready(function() {
+			
+			//$ionicAnalytics.register();
+			
 			if (window.cordova && window.cordova.plugins.Keyboard) {
 			  cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
 			  cordova.plugins.Keyboard.disableScroll(true);
@@ -13,6 +16,7 @@
 			if (window.StatusBar) {
 			  StatusBar.styleDefault();
 			}
+
 		});
 	})
 	
@@ -48,7 +52,8 @@
 				url: '/blog',
 				views: {
 				'menuContent': {
-					templateUrl: 'templates/blog.html'
+					templateUrl: 'templates/blog.html',
+					controller: 'BlogCtrl'
 					}
 				}
 			})
@@ -72,11 +77,29 @@
 				}
 			})
 			
+			.state('app.join', {
+				url: '/join',
+				views: {
+				'menuContent': {
+					templateUrl: 'templates/join.html'
+					}
+				}
+			})
+			
 			.state('app.timetable', {
 				url: '/timetable',
 				views: {
 				'menuContent': {
 					templateUrl: 'templates/timetable.html'
+					}
+				}
+			})
+			.state('app.post', {
+				url: "/blog/:postId",
+				views: {
+				'menuContent': {
+					templateUrl: "templates/post.html",
+					controller: 'PostCtrl'
 					}
 				}
 			});

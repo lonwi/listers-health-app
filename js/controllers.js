@@ -3,41 +3,80 @@
 	
 	angular.module('listershealth.controllers', [])
 	
-	.controller('AppCtrl', function($scope, $rootScope) {
-		$rootScope.url = 'https://www.listershealth.co.uk/wp-json/wp/v2/';
+	.controller('AppCtrl', function($scope, $rootScope, DataLoader) {
+		$rootScope.url = 'http://www.listershealth.co.uk/wp-json/wp/v2/';
 		
 	})
 	
-	.controller('BlogCtrl', function($scope, $rootScope, DataLoader, $http, $timeout) {
-		$scope.blogData = {};
+	.controller('PostCtrl', function($scope, $rootScope, $stateParams, DataLoader, $http, $ionicLoading, $timeout ) {
+		
+	})
+	
+	.controller('BlogCtrl', function($scope, $rootScope, DataLoader, $http, $ionicLoading, $timeout) {
 		
 		var postsApi = $rootScope.url + 'posts';
-		
+		$scope.moreItems = false;
 		
 		$scope.loadPosts = function() {
+			
+			$ionicLoading.show({
+				noBackdrop: true
+			});
 
 			DataLoader.get( postsApi ).then(function(response) {
 				
 				$scope.posts = response.data;
 				$scope.moreItems = true;
-				
+				$ionicLoading.hide();
 				console.log(postsApi, response.data);
 			
 			}, function(response) {
-				
-				console.log(postsApi, response.data);
+				console.log('Something went wrong');
+				console.log(postsApi, response);
+				$ionicLoading.hide();
 			});
 		};
 		
 		$scope.loadPosts();
 		
-		// Pull to refresh
-  		$scope.doRefresh = function() {
-			
+		var paged = 2;
+  
+  		$scope.loadMore = function() {
+			if( !$scope.moreItems ) {
+			  return;
+			}
+			var pg = paged++;
+			$timeout(function() {
+				
+				DataLoader.get( postsApi + '?page=' + pg ).then(function(response) {
+					angular.forEach( response.data, function( value, key ) {
+				  		$scope.posts.push(value);
+					});
+
+        			if( response.data.length <= 0 ) {
+          				$scope.moreItems = false;
+       				}
+      			}, function(response) {
+        			$scope.moreItems = false;
+					console.log('Something went wrong');
+					console.log(response);
+      			});
+				$scope.$broadcast('scroll.infiniteScrollComplete');
+      			$scope.$broadcast('scroll.resize');
+				
+			}, 1000);
+    	};
+		$scope.moreDataExists = function() {
+			return $scope.moreItems;
 		};
 		
-		$timeout(function(){
-		});
+		// Pull to refresh
+		$scope.doRefresh = function() {
+			$timeout( function() {
+				$scope.loadPosts();
+				$scope.$broadcast('scroll.refreshComplete');
+			}, 1000);
+		};
 	})
 	
 	.controller('TimetableCtrl', function($scope, $rootScope) {

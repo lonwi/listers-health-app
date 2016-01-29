@@ -1,1 +1,56 @@
-/* Empty. Add your own CSS if you like */
+/* Green: #77B729 */
+.responsive-image {
+	height:auto;
+	max-width:100%;
+}
+.menu {
+	background:#77B729;
+		
+}
+.menu .item {
+	border-color: #679e23;
+}
+.menu .item , .menu .item .item-content{
+	background:#77B729;
+	color:#fff;
+}
+.menu .bar-header {
+	text-align:center;
+	
+}
+.menu .bar-header img{
+	display:inline-block!important;
+	height:30px;
+	margin:0 auto;
+	
+}
+.menu .bar-footer {
+	background: #fff;
+	background-image:none!important;
+	border-color: #679e23;
+	text-align:center;
+}
+.menu .bar-footer img{
+	display:inline-block!important;
+	height:30px;
+	margin:0 auto;
+	
+}
+.menu .bar-footer .icon {
+	color:#77B729;
+	font-size:20px;
+}
+
+#map {
+	position: relative;
+	padding-bottom: 50%;
+	height: 0;
+	overflow: hidden;
+}
+#map iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100% !important;
+	height: 100% !important;
+}

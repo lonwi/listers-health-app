@@ -1,9 +1,8 @@
 <ion-side-menus enable-menu-with-back-views="true">
 
     <ion-side-menu-content>
-   		<ion-nav-bar class="bar-dark">
-            <ion-nav-back-button>
-            </ion-nav-back-button>
+   		<ion-nav-bar class="bar-balanced">
+            <ion-nav-back-button></ion-nav-back-button>
     
             <ion-nav-buttons side="left">
                 <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
@@ -11,21 +10,21 @@
     	</ion-nav-bar>
     	<ion-nav-view name="menuContent"></ion-nav-view>
         
-        
+        <!--
         <ion-footer-bar class="bar-stable">
         	Next Class Time
         </ion-footer-bar>
+        -->
         
     </ion-side-menu-content>
     
     
     <!-- Left menu -->
 	<ion-side-menu side="left">
-        <!--
-        <ion-header-bar class="bar-balanced">
-        	<h1 class="title">Listers Health</h1>
+
+        <ion-header-bar class="bar-stable">
+        	<img src="img/listers-health-logo.png" alt="Listers Health" class="responsive-image">
         </ion-header-bar>
-        -->
         
         <ion-content>
             <ion-list>
@@ -60,10 +59,19 @@
             </ion-list>
         </ion-content>
         
-        <ion-footer-bar class="bar-stable">
-        	<h2>Listers Health Ladies Gym</h2>
+        <ion-footer-bar>
+        	<div class="row">
+            	<div class="col">
+                	<a href="https://www.facebook.com/ListersLadiesGym" target="_blank"><i class="icon ion-social-facebook"></i></a>
+                </div>
+                <div class="col">
+                	<a href="https://twitter.com/listershealth" target="_blank"><i class="icon ion-social-twitter"></i></a>
+                </div>
+                <div class="col">
+                	<a href="https://www.instagram.com/listershealth/" target="_blank"><i class="icon ion-social-pinterest"></i></a>
+                </div>
+            </div>
         </ion-footer-bar>
-        
         
     </ion-side-menu>
     
