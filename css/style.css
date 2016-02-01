@@ -1,7 +1,8 @@
 /* Green: #77B729 */
 .responsive-image {
 	height:auto;
-	max-width:100%;
+	max-width: 100%;
+	width:100%;
 }
 .menu {
 	background:#77B729;

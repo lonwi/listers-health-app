@@ -4,35 +4,77 @@
 	angular.module('listershealth.controllers', [])
 	
 	.controller('AppCtrl', function($scope, $rootScope, DataLoader) {
-		$rootScope.url = 'http://www.listershealth.co.uk/wp-json/wp/v2/';
+		$rootScope.url = 'http://www.listershealth.co.uk/_app_connector.php';
+		$rootScope.lhk = 's5cnJ3KK1gLfBtzwzsRbRMiIVDbzXOMM3f2Io5NSWKpXySu0S9LnZzWSSUOvWjm';
 		
 	})
 	
-	.controller('PostCtrl', function($scope, $rootScope, $stateParams, DataLoader, $http, $ionicLoading, $timeout ) {
+	.controller('PostCtrl', function($scope, $rootScope, $stateParams, DataLoader, $http, $ionicLoading, $timeout, CacheFactory ) {
+		if ( ! CacheFactory.get('postCache') ) {
+			CacheFactory.createCache('postCache');
+		}
+		var postCache = CacheFactory.get( 'postCache' );
+		$scope.itemID = $stateParams.postId;
+		
+		var singlePostApi = $rootScope.url+'?lhk='+$rootScope.lhk+'&type=post&post_id=' + $scope.itemID;
+		
+		$scope.loadPost = function() {
+
+			// Fetch remote post
+			$ionicLoading.show();
+			
+			DataLoader.get( singlePostApi ).then(function(response) {
+			
+				$scope.post = response.data.data;
+			
+				postCache.put( response.data.data.id, response.data.data );
+			
+				$ionicLoading.hide();
+			}, function(response) {
+				$ionicLoading.hide();
+			});
+		
+		};
+		
+		if( !postCache.get( $scope.itemID ) ) {
+			// Item is not in cache, go get it
+			$scope.loadPost();
+		} else {
+			// Item exists, use cached item
+			$scope.post = postCache.get( $scope.itemID );
+		}
+		
+		// Pull to refresh
+		$scope.doRefresh = function() {
+			$timeout( function() {
+			$scope.loadPost();
+			//Stop the ion-refresher from spinning
+			$scope.$broadcast('scroll.refreshComplete');
+			}, 1000);
+		
+		};
 		
 	})
 	
 	.controller('BlogCtrl', function($scope, $rootScope, DataLoader, $http, $ionicLoading, $timeout) {
 		
-		var postsApi = $rootScope.url + 'posts';
+		var postsApi = $rootScope.url+'?lhk='+$rootScope.lhk+'&type=posts';
 		$scope.moreItems = false;
 		
 		$scope.loadPosts = function() {
 			
-			$ionicLoading.show({
-				noBackdrop: true
-			});
+			$ionicLoading.show();
 
 			DataLoader.get( postsApi ).then(function(response) {
 				
-				$scope.posts = response.data;
+				$scope.posts = response.data.data;
 				$scope.moreItems = true;
 				$ionicLoading.hide();
-				console.log(postsApi, response.data);
+				//console.log(response.data.data);
 			
 			}, function(response) {
-				console.log('Something went wrong');
-				console.log(postsApi, response);
+				//console.log('Something went wrong');
+				//console.log(postsApi, response);
 				$ionicLoading.hide();
 			});
 		};
@@ -48,12 +90,12 @@
 			var pg = paged++;
 			$timeout(function() {
 				
-				DataLoader.get( postsApi + '?page=' + pg ).then(function(response) {
-					angular.forEach( response.data, function( value, key ) {
+				DataLoader.get( postsApi + '&page=' + pg ).then(function(response) {
+					angular.forEach( response.data.data, function( value, key ) {
 				  		$scope.posts.push(value);
 					});
 
-        			if( response.data.length <= 0 ) {
+        			if( response.data.data.length <= 0 ) {
           				$scope.moreItems = false;
        				}
       			}, function(response) {

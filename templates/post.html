@@ -6,9 +6,9 @@
         <ion-refresher on-refresh="doRefresh()"></ion-refresher>
         <div class="card post">
             <div class="item post-title">
-            <h2 ng-bind-html="post.title.rendered"></h2>
+            <h2 ng-bind-html="post.post_title"></h2>
             </div>
-            <div class="item item-body" ng-if="content" ng-bind-html="content | html_filters"></div>
+            <div class="item item-body" ng-if="post.post_content" ng-bind-html="post.post_content"></div>
         </div>
     </ion-content>
 </ion-view>

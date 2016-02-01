@@ -1,26 +1,35 @@
 (function () {
 	'use strict';
 	
-	angular.module('listershealth', ['ionic','ionic.service.core', 'ionic.service.analytics', 'listershealth.controllers', 'listershealth.services'])
+	angular.module('listershealth', ['ionic','ionic.service.core', 'listershealth.controllers', 'listershealth.services', 'ngCordova', 'angular-cache'])
 	
-	.run(function($ionicPlatform, $ionicAnalytics) {
+	.run(function($ionicPlatform) {
 		$ionicPlatform.ready(function() {
-			
-			//$ionicAnalytics.register();
 			
 			if (window.cordova && window.cordova.plugins.Keyboard) {
 			  cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
 			  cordova.plugins.Keyboard.disableScroll(true);
-			
 			}
 			if (window.StatusBar) {
 			  StatusBar.styleDefault();
 			}
-
 		});
 	})
 	
-	.config(function($stateProvider, $urlRouterProvider) {
+	.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, CacheFactoryProvider) {
+		angular.extend(CacheFactoryProvider.defaults, { 
+			'storageMode': 'localStorage',
+			'capacity': 10,
+			'maxAge': 10800000,
+			'deleteOnExpire': 'aggressive',
+			'recycleFreq': 10000
+		});
+		
+		// Native scrolling
+		if( ionic.Platform.isAndroid() ) {
+			$ionicConfigProvider.scrolling.jsScrolling(false);
+		}
+		
 		$stateProvider
 	
 			.state('app', {
@@ -104,8 +113,14 @@
 				}
 			});
 
-	  // if none of the above states are matched, use this as the fallback
-	  $urlRouterProvider.otherwise('/app/home');
-	});
+	  	// if none of the above states are matched, use this as the fallback
+	  	$urlRouterProvider.otherwise('/app/home');
+	})
+	
+	.constant('$ionicLoadingConfig', {
+		template: 'Loading...'
+	})
+	
+	;
 	
 }());
