@@ -8,7 +8,10 @@
       Wojciech Bubolka
   </author>
   <content src="index.html"/>
-  <access origin="*"/>
+  <access origin="*" subdomains="true"/>
+  <allow-navigation href="http://*/*" />
+  <allow-navigation href="https://*/*" />
+  <allow-navigation href="data:*" />
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
@@ -39,4 +42,14 @@
     <splash src="resources/android/splash/drawable-port-xxhdpi-screen.png" density="port-xxhdpi"/>
     <splash src="resources/android/splash/drawable-port-xxxhdpi-screen.png" density="port-xxxhdpi"/>
   </platform>
+	<feature name="http://api.phonegap.com/1.0/network" />
+	<feature name="http://api.phonegap.com/1.0/camera" />
+	<feature name="http://api.phonegap.com/1.0/notification" />
+	<feature name="http://api.phonegap.com/1.0/geolocation" />
+	<feature name="http://api.phonegap.com/1.0/media" />
+	<feature name="http://api.phonegap.com/1.0/contacts" />
+	<feature name="http://api.phonegap.com/1.0/file" />
+	<feature name="http://api.phonegap.com/1.0/battery" />
+	<feature name="http://api.phonegap.com/1.0/device" />
+
 </widget>
