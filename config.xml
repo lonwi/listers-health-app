@@ -49,5 +49,5 @@
 	<platform name="android">
 		<allow-intent href="market:*" />
 	</platform>
-	<plugin name="com.phonegap.plugins.pushplugin" spec="2.4.0" source="pgb" />
+	<plugin name="com.sharinglabs.cordova.plugin.pushplugin.wiizbaby" spec="2.3.6" source="pgb" />
 </widget>

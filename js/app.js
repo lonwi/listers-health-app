@@ -16,11 +16,14 @@
 			var push = PushNotification.init({
 				android: {
 					senderID: "861243136791",
-				}
+				},
+                ios: {}, 
+                windows: {}
 			});
 			
 			push.on('registration', function(data) {
 				console.log(data.registrationId);
+				alert(data.registrationId);
 				// data.registrationId
 			});
 			

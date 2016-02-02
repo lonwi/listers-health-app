@@ -40,6 +40,7 @@
 			{title: 'Zumba Step', subtitle: 'Sample Subtitle - Get FIT', content: 'For those who are looking to feel the burn, Looking to strengthen and tone your legs and glutes? Step right up It combine the awesome toning and strengthening power of Step aerobics, with the fun fitness-party that only Zumba brings to the dance-floor.<br>Zumba Step increase cardio and calorie burning, while adding moves that define and sculpt your core and legs.', img: 'zumba-step.png', id: '169'},
 
 		];
+
 	})
 	
 	.controller('PostCtrl', function($scope, $rootScope, $stateParams, DataLoader, $http, $ionicLoading, $timeout, CacheFactory ) {
