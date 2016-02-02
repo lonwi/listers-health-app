@@ -1,0 +1,16 @@
+<ion-modal-view>
+    <ion-header-bar class="bar-balanced">
+		<h1 class="title">{{class.title}}</h1>
+    </ion-header-bar>
+    
+    <ion-content>
+    	<div class="padding" ng-if="class.img">
+        	<img ng-src="img/classes/{{class.img}}" alt="{{class.title}}" class="responsive-image">
+        </div>
+        <div class="padding"><p ng-bind-html="class.content"></p></div>
+    </ion-content>
+    <ion-footer-bar class="bar-light">
+		<button class="button button-block button-dark icon icon-left ion-ios-close-outline" ng-click="closeModal()">Close</button>
+    </ion-footer-bar>
+    
+</ion-modal-view>

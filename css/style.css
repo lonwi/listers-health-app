@@ -1,4 +1,7 @@
 /* Green: #77B729 */
+.green {
+	color: #77B729!important;
+}
 .responsive-image {
 	height:auto;
 	max-width: 100%;
@@ -54,4 +57,9 @@
 	left: 0;
 	width: 100% !important;
 	height: 100% !important;
+}
+.footer-next-class {
+	display:block;
+	font-weight:700;
+	text-align:center;
 }

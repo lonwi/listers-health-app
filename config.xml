@@ -49,4 +49,5 @@
 	<platform name="android">
 		<allow-intent href="market:*" />
 	</platform>
+	<plugin name="com.phonegap.plugins.pushplugin" spec="2.4.0" source="pgb" />
 </widget>

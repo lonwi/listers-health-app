@@ -12,11 +12,14 @@
     	</ion-nav-bar>
     	<ion-nav-view name="menuContent"></ion-nav-view>
         
-        <!--
-        <ion-footer-bar class="bar-stable">
-        	Next Class Time
+        
+        <ion-footer-bar class="bar-stable" ng-controller="NextClassCtrl">
+        	<div class="row" ng-repeat="class in classes">
+            	<div class="col">
+                <div class="footer-next-class" ng-controller="ClassModalCtrl" ng-click="openModal();">Our next class: <a class="green" >{{class.title}}</a> - starts {{class.day}} at {{class.date}}.</div>
+                </div>
+            </div>
         </ion-footer-bar>
-        -->
         
     </ion-side-menu-content>
     
