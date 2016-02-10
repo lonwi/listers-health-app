@@ -13,35 +13,6 @@
 			if (window.StatusBar) {
 			  StatusBar.styleDefault();
 			}
-			var push = PushNotification.init({
-				android: {
-					senderID: "861243136791",
-				},
-                ios: {}, 
-                windows: {}
-			});
-			
-			push.on('registration', function(data) {
-				console.log(data.registrationId);
-				alert(data.registrationId);
-				// data.registrationId
-			});
-			
-			push.on('notification', function(data) {
-				console.log(data);
-				alert(data.title+" Message: " +data.message);
-				// data.message,
-				// data.title,
-				// data.count,
-				// data.sound,
-				// data.image,
-				// data.additionalData
-			});
-			
-			push.on('error', function(e) {
-				console.log(e.message);
-				// e.message
-			});
 			
 		});
 	})
@@ -129,7 +100,8 @@
 				url: '/timetable',
 				views: {
 				'menuContent': {
-					templateUrl: 'templates/timetable.html'
+					templateUrl: 'templates/timetable.html',
+					controller: 'TimetableCtrl'
 					}
 				}
 			})

@@ -155,7 +155,20 @@
 		};
 	})
 	
-	.controller('TimetableCtrl', function($scope, $rootScope) {
+	.controller('TimetableCtrl', function($scope, $rootScope, DataLoader, $http, $ionicLoading, $timeout) {
+
+		$scope.loadTimetable = function($daycode) {
+
+			var timetableApi = $rootScope.url+'?lhk='+$rootScope.lhk+'&type=timetable&daycode='+$daycode+'';
+			$ionicLoading.show();
+			DataLoader.get( timetableApi ).then(function(response) {
+				$scope.classes = response.data.data;
+				$ionicLoading.hide();
+			}, function(response) {
+				$ionicLoading.hide();
+			});
+			
+		};
 	
 	})
 	
