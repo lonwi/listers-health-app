@@ -1,6 +1,6 @@
 <ion-view view-title="Timetable">
 
-	<ion-tabs class="tabs-stable tabs-icon-only tabs-striped tabs-top">
+    <ion-tabs class="tabs-stable tabs-icon-only tabs-striped tabs-top">
     	
         <ion-tab title="Monday" on-select="loadTimetable('153')">
         	<ion-nav-view name="tab-monday">
@@ -18,7 +18,12 @@
         <ion-tab title="Tuesday" on-select="loadTimetable('154')">
         	<ion-nav-view name="tab-tuesday">
             	<ion-content padding="true" has-header="true">
-                	Tuesday
+                    <ion-list>
+                        <ion-item ng-repeat="class in classes">
+                        	<h2>{{class.title}}</h2>
+                			<h4>{{class.start}} - {{class.end}}</h4>
+                        </ion-item>
+                    </ion-list>
                 </ion-content>
             </ion-nav-view>
         </ion-tab>
@@ -26,7 +31,12 @@
         <ion-tab title="Wednesday" on-select="loadTimetable('155')">
         	<ion-nav-view name="tab-wednesday">
             	<ion-content padding="true" has-header="true">
-                	Wednesday
+                    <ion-list>
+                        <ion-item ng-repeat="class in classes">
+                        	<h2>{{class.title}}</h2>
+                			<h4>{{class.start}} - {{class.end}}</h4>
+                        </ion-item>
+                    </ion-list>
                 </ion-content>
             </ion-nav-view>
         </ion-tab>
@@ -34,7 +44,12 @@
         <ion-tab title="Thursday" on-select="loadTimetable('156')">
         	<ion-nav-view name="tab-thursday">
             	<ion-content padding="true" has-header="true">
-                	Thursday
+                    <ion-list>
+                        <ion-item ng-repeat="class in classes">
+                        	<h2>{{class.title}}</h2>
+                			<h4>{{class.start}} - {{class.end}}</h4>
+                        </ion-item>
+                    </ion-list>
                 </ion-content>
             </ion-nav-view>
         </ion-tab>
@@ -42,7 +57,12 @@
         <ion-tab title="Friday" on-select="loadTimetable('157')">
         	<ion-nav-view name="tab-friday">
             	<ion-content padding="true" has-header="true">
-                	Friday
+                    <ion-list>
+                        <ion-item ng-repeat="class in classes">
+                        	<h2>{{class.title}}</h2>
+                			<h4>{{class.start}} - {{class.end}}</h4>
+                        </ion-item>
+                    </ion-list>
                 </ion-content>
             </ion-nav-view>
         </ion-tab>
@@ -50,7 +70,12 @@
         <ion-tab title="Saturday" on-select="loadTimetable('158')">
         	<ion-nav-view name="tab-saturday">
             	<ion-content padding="true" has-header="true">
-                	Saturday
+                    <ion-list>
+                        <ion-item ng-repeat="class in classes">
+                        	<h2>{{class.title}}</h2>
+                			<h4>{{class.start}} - {{class.end}}</h4>
+                        </ion-item>
+                    </ion-list>
                 </ion-content>
             </ion-nav-view>
         </ion-tab>
@@ -58,14 +83,16 @@
         <ion-tab title="Sunday" on-select="loadTimetable('159')">
         	<ion-nav-view name="tab-sunday">
             	<ion-content padding="true" has-header="true">
-                	Sunday
+                    <ion-list>
+                        <ion-item ng-repeat="class in classes">
+                        	<h2>{{class.title}}</h2>
+                			<h4>{{class.start}} - {{class.end}}</h4>
+                        </ion-item>
+                    </ion-list>
                 </ion-content>
             </ion-nav-view>
         </ion-tab>
-        
-        
-   	
+
 	</ion-tabs>
 
 </ion-view>
-
