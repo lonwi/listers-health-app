@@ -63,8 +63,75 @@
 	font-weight:700;
 	text-align:center;
 }
+.animate-list-item.ng-enter {
+	-webkit-animation: bounceInUp 1s;
+    animation: bounceInUp 1s;
+}
+
+.animate-list-item.ng-enter-stagger {
+  -webkit-animation-delay:250ms;
+  animation-delay:250ms;
+
+  /* override to make sure it's not inherited from other styles */
+  -webkit-animation-duration:0;
+  animation-duration:0;
+}
+.posts-view {
+	background-color: #EAEAEA !important;
+ 	vertical-align: middle;
+}
+.posts-view .post-heading {
+    background-color: #77B729;
+    border-color: #000; 
+	color:#fff;
+}
+.posts-view .post-heading h2.post-title {
+	color:#fff;
+}
+.posts-view .post-content {
+	
+}
+.posts-view .post-content img{
+	width:100%;
+	max-width:100%;
+	height:auto;
+}
+.posts-view .post-excerpt {
+	padding: 10px 0px;
+}
+.posts-view .post-actions {
+	padding: 10px 0px;
+}
+.posts-list {
+}
+
+
+.post {
+}
+.post .post-header {
+	background-color: #EAEAEA !important;
+	padding:20px 10px;
+
+}
+.post  h2.post-title {
+	font-size:16px;
+	margin:0;
+
+}
+.post .post-content {
+	background-color:#fff;
+	padding:10px;
+}
+
 .post img{
 	width:100%;
 	max-width:100%;
 	height:auto;
+}
+.post img.wp-smiley{
+	display:none;
+}
+
+.modal-wrapper .bar-footer {
+	padding:0 5px;
 }

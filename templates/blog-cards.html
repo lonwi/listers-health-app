@@ -1,0 +1,28 @@
+<ion-view view-title="Blog" class="posts-view">
+    <ion-content has-header="true" class="has-footer">
+    	<ion-refresher on-refresh="doRefresh()" pulling-text="Pull to refresh..."></ion-refresher>
+        
+        <div class="posts-list">
+            <div ng-repeat="post in posts track by $index" class="list card post-item animate-list-item">
+                <div class="post-heading item item-text-wrap">
+                    <h2 class="post-title" ng-bind-html="post.post_title | rawHtml"></h2>
+                </div>
+                <div class="post-content item item-text-wrap" post-content>
+                	<img ng-if="post.post_thumbnail" ng-src="{{post.post_thumbnail}}" />
+                    <p class="post-excerpt" ng-if="post.post_excerpt" dynamic-anchor-fix ng-bind-html="post.post_excerpt | rawHtml"></p>
+                    <div class="post-actions row">
+                        <div class="read-more col text-center">
+                            <a href="#/app/blog/{{post.id}}" class="button button-balanced button-outline" track>
+                            Read more
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+        <!-- Infinit scroll -->
+        <ion-infinite-scroll ng-if="moreDataExists()" on-infinite="loadMore()" distance="1%" immediate-check="false" icon="ion-loading-c">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

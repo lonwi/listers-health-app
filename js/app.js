@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 	
-	angular.module('listershealth', ['ionic','ionic.service.core', 'listershealth.controllers', 'listershealth.services', 'ngCordova', 'angular-cache'])
+	angular.module('listershealth', ['ionic','ionic.service.core', 'listershealth.controllers', 'listershealth.services', 'listershealth.filters', 'ngCordova', 'angular-cache'])
 	
 	.run(function($ionicPlatform) {
 		$ionicPlatform.ready(function() {
@@ -62,7 +62,7 @@
 				url: '/blog',
 				views: {
 				'menuContent': {
-					templateUrl: 'templates/blog.html',
+					templateUrl: 'templates/blog-cards.html',
 					controller: 'BlogCtrl'
 					}
 				}
