@@ -28,7 +28,8 @@
 				});
 			}
 		  }, 100);
-		 
+		  
+		
 		var notificationOpenedCallback = function(jsonData) {
 			console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
 		};
@@ -36,8 +37,8 @@
 		window.plugins.OneSignal.init("9c71e330-258f-4690-ac1d-919de04ed955",
 						 {googleProjectNumber: "861243136791"},
 						 notificationOpenedCallback);
-		// Show an alert box if a notification comes in when the user is in your app.
 		window.plugins.OneSignal.enableInAppAlertNotification(true);
+		
 		
 })
 	
