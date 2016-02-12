@@ -5,7 +5,7 @@
 	
 	.run(function($ionicPlatform, $ionicPopup) {
 		$ionicPlatform.ready(function() {
-			/* 
+			 
 			var notificationOpenedCallback = function(jsonData) {
 				console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
 			};
@@ -14,7 +14,7 @@
 							 {googleProjectNumber: "861243136791"},
 							 notificationOpenedCallback);
 			window.plugins.OneSignal.enableInAppAlertNotification(true);
-			*/
+			
 			var Pushbots = PushbotsPlugin.initialize("56bddd07177959be178b4567", {"android":{"sender_id":"861243136791"}});
 		});
 		
