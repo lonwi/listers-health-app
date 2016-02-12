@@ -51,9 +51,6 @@
 		<allow-intent href="market:*" />
 	</platform>
 	<gap:plugin name="onesignal-cordova-plugin" source="npm" />
-
-	<!-- Recommend the newest cli but requires cli-5.1.1+ and gradle for Android. -->
-	<!-- If the below settingd are not compatible with your project set the "PGB ANT" version above. -->
 	<preference name="phonegap-version" value="cli-5.4.1" />
 	<preference name="android-build-tool" value="gradle" />
 </widget>
