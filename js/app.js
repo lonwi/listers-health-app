@@ -28,8 +28,18 @@
 				});
 			}
 		  }, 100);
+		  
+		/* 
+		var notificationOpenedCallback = function(jsonData) {
+			console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+		};
 
-		var Pushbots = PushbotsPlugin.initialize("56bddd07177959be178b4567", {"android":{"sender_id":"861243136791"}});
+		window.plugins.OneSignal.init("9c71e330-258f-4690-ac1d-919de04ed955",
+						 {googleProjectNumber: "861243136791"},
+						 notificationOpenedCallback);
+		window.plugins.OneSignal.enableInAppAlertNotification(true);
+		*/
+		//var Pushbots = PushbotsPlugin.initialize("56bddd07177959be178b4567", {"android":{"sender_id":"861243136791"}});
 		
 })
 	
