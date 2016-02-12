@@ -53,10 +53,6 @@
 	</platform>
 	
 	<!-- Core plugins -->
-	<gap:plugin name="org.apache.cordova.network-information" />
-    <gap:plugin name="org.apache.cordova.splashscreen" />
-    <gap:plugin name="org.apache.cordova.vibration" />
-	<gap:plugin name="org.apache.cordova.inappbrowser" />
 
 	<!-- Third party plugins -->
 	<gap:plugin name="pushbots-cordova-plugin" source="npm" />
