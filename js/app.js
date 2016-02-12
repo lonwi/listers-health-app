@@ -3,7 +3,7 @@
 	
 	angular.module('listershealth', ['ionic','ionic.service.core', 'listershealth.controllers', 'listershealth.services', 'listershealth.filters', 'ngCordova', 'angular-cache'])
 	
-	.run(function($ionicPlatform) {
+	.run(function($ionicPlatform, $ionicPopup) {
 		$ionicPlatform.ready(function() {
 			
 			if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -15,6 +15,19 @@
 			}
 			
 		});
+		
+		$ionicPlatform.registerBackButtonAction(function(event) {
+			if (true) { // your check here
+			  $ionicPopup.confirm({
+				title: 'System warning',
+				template: 'are you sure you want to exit?'
+			  }).then(function(res) {
+				if (res) {
+				  ionic.Platform.exitApp();
+				}
+			  })
+			}
+		  }, 100);
 	})
 	
 	.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, CacheFactoryProvider) {
