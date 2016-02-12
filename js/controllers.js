@@ -155,19 +155,30 @@
 		};
 	})
 	
-	.controller('TimetableCtrl', function($scope, $rootScope, DataLoader, $http, $ionicLoading, $timeout) {
+	.controller('TimetableCtrl', function($scope, $rootScope, DataLoader, $http, $ionicLoading, $timeout, CacheFactory) {
+		
+		if ( ! CacheFactory.get('timetableCache') ) {
+			CacheFactory.createCache('timetableCache');
+		}
+		var timetableCache = CacheFactory.get( 'timetableCache' );
 
 		$scope.loadTimetable = function($daycode) {
-
 			var timetableApi = $rootScope.url+'?lhk='+$rootScope.lhk+'&type=timetable&daycode='+$daycode+'';
 			$ionicLoading.show();
-			DataLoader.get( timetableApi ).then(function(response) {
-				$scope.classes = response.data.data;
+			if( !timetableCache.get( $daycode ) ) {
+				DataLoader.get( timetableApi ).then(function(response) {
+					$scope.classes = response.data.data;
+					
+					timetableCache.put( $daycode, response.data.data );
+					
+					$ionicLoading.hide();
+				}, function(response) {
+					$ionicLoading.hide();
+				});
+			} else {
+				$scope.classes = timetableCache.get( $daycode );
 				$ionicLoading.hide();
-			}, function(response) {
-				$ionicLoading.hide();
-			});
-			
+			}
 		};
 	
 	})

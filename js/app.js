@@ -18,17 +18,27 @@
 		
 		$ionicPlatform.registerBackButtonAction(function(event) {
 			if (true) { // your check here
-			  $ionicPopup.confirm({
-				title: 'System warning',
-				template: 'are you sure you want to exit?'
-			  }).then(function(res) {
-				if (res) {
-				  ionic.Platform.exitApp();
-				}
-			  })
+				$ionicPopup.confirm({
+					title: 'System Warning',
+					template: 'Are you sure you want to exit?'
+				}).then(function(res) {
+					if (res) {
+					  ionic.Platform.exitApp();
+					}
+				});
 			}
 		  }, 100);
-	})
+		  
+		var notificationOpenedCallback = function(jsonData) {
+			console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+		};
+
+		window.plugins.OneSignal.init("9c71e330-258f-4690-ac1d-919de04ed955",
+						 {googleProjectNumber: "861243136791"},
+						 notificationOpenedCallback);
+		// Show an alert box if a notification comes in when the user is in your app.
+		window.plugins.OneSignal.enableInAppAlertNotification(true);
+})
 	
 	.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, CacheFactoryProvider) {
 		angular.extend(CacheFactoryProvider.defaults, { 
@@ -63,7 +73,7 @@
 			})
 	
 			.state('app.about', {
-				url: '/about',
+				url: '/home/about',
 				views: {
 				'menuContent': {
 					templateUrl: 'templates/about.html'
@@ -72,7 +82,7 @@
 			})
 			
 			.state('app.blog', {
-				url: '/blog',
+				url: '/home/blog',
 				views: {
 				'menuContent': {
 					templateUrl: 'templates/blog-cards.html',
@@ -82,7 +92,7 @@
 			})
 			
 			.state('app.classes', {
-				url: '/classes',
+				url: '/home/classes',
 				views: {
 				'menuContent': {
 					templateUrl: 'templates/classes.html',
@@ -92,7 +102,7 @@
 			})
 			
 			.state('app.contact', {
-				url: '/contact',
+				url: '/home/contact',
 				views: {
 				'menuContent': {
 					templateUrl: 'templates/contact.html'
@@ -101,7 +111,7 @@
 			})
 			
 			.state('app.join', {
-				url: '/join',
+				url: '/home/join',
 				views: {
 				'menuContent': {
 					templateUrl: 'templates/join.html'
@@ -110,7 +120,7 @@
 			})
 			
 			.state('app.timetable', {
-				url: '/timetable',
+				url: '/home/timetable',
 				views: {
 				'menuContent': {
 					templateUrl: 'templates/timetable.html',
@@ -119,7 +129,7 @@
 				}
 			})
 			.state('app.post', {
-				url: "/blog/:postId",
+				url: "/home/blog/:postId",
 				views: {
 				'menuContent': {
 					templateUrl: "templates/post.html",
