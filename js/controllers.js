@@ -4,6 +4,9 @@
 	angular.module('listershealth.controllers', [])
 	
 	.controller('AppCtrl', function($scope, $rootScope, DataLoader) {
+		
+		window.analytics.trackView('Screen Title');
+		
 		$rootScope.url = 'http://www.listershealth.co.uk/_app_connector.php';
 		$rootScope.lhk = 's5cnJ3KK1gLfBtzwzsRbRMiIVDbzXOMM3f2Io5NSWKpXySu0S9LnZzWSSUOvWjm';
 		

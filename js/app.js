@@ -3,8 +3,11 @@
 	
 	angular.module('listershealth', ['ionic','ionic.service.core', 'listershealth.controllers', 'listershealth.services', 'listershealth.filters', 'ngCordova', 'angular-cache'])
 	
-	.run(function($ionicPlatform, $ionicPopup) {
+	.run(function($ionicPlatform, $ionicPopup, $rootScope, $location, $window) {
+		
 		$ionicPlatform.ready(function() {
+
+            window.analytics.startTrackerWithId("UA-73141751-2");
 			 
 			var notificationOpenedCallback = function(jsonData) {
 				console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
@@ -17,7 +20,7 @@
 			
 			//var Pushbots = PushbotsPlugin.initialize("56bddd07177959be178b4567", {"android":{"sender_id":"861243136791"}});
 		});
-		
+
 		$ionicPlatform.ready(function() {
 			
 			if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -27,7 +30,7 @@
 			if (window.StatusBar) {
 			  StatusBar.styleDefault();
 			}
-			
+
 		});
 		
 		$ionicPlatform.registerBackButtonAction(function(event) {
@@ -42,7 +45,8 @@
 				});
 			}
 		  }, 100);
-})
+	  
+	})
 	
 	.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, CacheFactoryProvider) {
 		angular.extend(CacheFactoryProvider.defaults, { 
