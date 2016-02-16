@@ -60,4 +60,6 @@
 	<gap:plugin name="onesignal-cordova-plugin" source="npm" />
 	<preference name="phonegap-version" value="cli-5.4.1" />
 	<preference name="android-build-tool" value="gradle" />
+	
+	<gap:plugin name="com.admob.google" source="plugins.cordova.io" version="2.0.14"/>
 </widget>

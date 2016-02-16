@@ -10,7 +10,7 @@
 			var notificationOpenedCallback = function(jsonData) {
 				console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
 			};
-			if(typeof window.plugins.OneSignal != 'undefined'){ 
+			if(window.plugins && window.plugins.OneSignal){ 
 				window.plugins.OneSignal.init("9c71e330-258f-4690-ac1d-919de04ed955",
 								 {googleProjectNumber: "861243136791"},
 								 notificationOpenedCallback);
@@ -19,6 +19,24 @@
 			
 			
 			//var Pushbots = PushbotsPlugin.initialize("56bddd07177959be178b4567", {"android":{"sender_id":"861243136791"}});
+		});
+		$ionicPlatform.ready(function() {
+			if (admob) {
+				// Set AdMobAds options:
+				admob.setOptions({
+					publisherId:          "ca-app-pub-3328576052277688/9004819852",  // Required
+					//interstitialAdId:     "ca-app-pub-XXXXXXXXXXXXXXXX/IIIIIIIIII",  // Optional
+					//tappxIdiOs:           "/XXXXXXXXX/Pub-XXXX-iOS-IIII",            // Optional
+					//tappxIdAndroid:       "/XXXXXXXXX/Pub-XXXX-Android-AAAA",        // Optional
+					//tappxShare:           0.5                                        // Optional
+				});
+				
+				// Start showing banners (atomatic when autoShowBanner is set to true)
+				admob.createBannerView();
+				
+				// Request interstitial (will present automatically when autoShowInterstitial is set to true)
+				admob.requestInterstitial();	
+			}
 		});
 
 		$ionicPlatform.ready(function() {
