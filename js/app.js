@@ -20,34 +20,31 @@
 			
 			//var Pushbots = PushbotsPlugin.initialize("56bddd07177959be178b4567", {"android":{"sender_id":"861243136791"}});
 		});
+		
 		$ionicPlatform.ready(function() {
-			if (admob) {
-				// Set AdMobAds options:
-				admob.setOptions({
-					publisherId:          "ca-app-pub-3328576052277688/9004819852",  // Required
-					//interstitialAdId:     "ca-app-pub-XXXXXXXXXXXXXXXX/IIIIIIIIII",  // Optional
-					//tappxIdiOs:           "/XXXXXXXXX/Pub-XXXX-iOS-IIII",            // Optional
-					//tappxIdAndroid:       "/XXXXXXXXX/Pub-XXXX-Android-AAAA",        // Optional
-					//tappxShare:           0.5                                        // Optional
+			var admobid = { // for Android
+				banner: 'ca-app-pub-3328576052277688/9004819852',
+				//interstitial: 'ca-app-pub-6869992474017983/1657046752'
+			};
+			if (AdMob) {
+				AdMob.createBanner({
+					adId : admobid.banner,
+					position : AdMob.AD_POSITION.BOTTOM_CENTER,
+					autoShow : true
 				});
-				
-				// Start showing banners (atomatic when autoShowBanner is set to true)
-				admob.createBannerView();
-				
-				// Request interstitial (will present automatically when autoShowInterstitial is set to true)
-				admob.requestInterstitial();	
 			}
 		});
-
+		
 		$ionicPlatform.ready(function() {
 			
 			if (window.cordova && window.cordova.plugins.Keyboard) {
-			  cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-			  cordova.plugins.Keyboard.disableScroll(true);
+				cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+				cordova.plugins.Keyboard.disableScroll(true);
 			}
 			if (window.StatusBar) {
-			  StatusBar.styleDefault();
+				StatusBar.styleDefault();
 			}
+			/*
 			if(window.Connection) {
 				if(navigator.connection.type == Connection.NONE) {
 					alert('There is no internet connection available');
@@ -57,6 +54,7 @@
 			}else{
 				alert('Cannot find Window.Connection');
 			}
+			*/
 
 		});
 		/*
