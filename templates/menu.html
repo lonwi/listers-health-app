@@ -1,7 +1,7 @@
-<ion-side-menus enable-menu-with-back-views="false">
+<ion-side-menus enable-menu-with-back-views="true">
 
     <ion-side-menu-content>
-   		<ion-nav-bar class="bar bar-balanced">
+   		<ion-nav-bar class="bar bar-balanced"  side="left">
             
             <ion-nav-back-button>
       		</ion-nav-back-button>
@@ -9,14 +9,6 @@
         		<button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         		</button>
       		</ion-nav-buttons>
-            
-            <!--
-            <ion-nav-back-button></ion-nav-back-button>
-    
-            <ion-nav-buttons side="right">
-                <button class="button button-icon button-clear ion-navicon" menu-toggle="right"></button>
-            </ion-nav-buttons>
-            -->
             
     	</ion-nav-bar>
     	<ion-nav-view name="menuContent"></ion-nav-view>
@@ -48,24 +40,24 @@
                     Home
                 </ion-item>
                 <!--
-                <ion-item class="item item-icon-left" nav-clear menu-close href="#/app/home/about">
+                <ion-item class="item item-icon-left" nav-clear menu-close href="#/app/about">
                     <i class="icon ion-ios-home-outline"></i>
                     About
                 </ion-item>
                 -->
-                <ion-item class="item item-icon-left" nav-clear menu-close href="#/app/home/blog">
+                <ion-item class="item item-icon-left" nav-clear menu-close href="#/app/blog">
                 	<i class="icon ion-ios-list-outline"></i>
                		Blog
                 </ion-item>
-                <ion-item class="item item-icon-left" nav-clear menu-close href="#/app/home/classes">
+                <ion-item class="item item-icon-left" nav-clear menu-close href="#/app/classes">
                 	<i class="icon ion-ios-pulse"></i>
                		Classes
                 </ion-item>
-                <ion-item class="item item-icon-left" nav-clear menu-close href="#/app/home/timetable">
+                <ion-item class="item item-icon-left" nav-clear menu-close href="#/app/timetable">
                     <i class="icon ion-ios-clock-outline"></i>
                     Timetable
                 </ion-item>
-                <ion-item class="item item-icon-left" nav-clear menu-close href="#/app/home/contact">
+                <ion-item class="item item-icon-left" nav-clear menu-close href="#/app/contact">
                     <i class="icon ion-ios-navigate-outline"></i>
                     Contact
                 </ion-item>

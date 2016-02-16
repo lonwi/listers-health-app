@@ -24,6 +24,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+if(typeof cordova != 'undefined'){
+
 
 var OneSignal = function() {
 };
@@ -121,3 +123,4 @@ if (!window.plugins.OneSignal)
 
 if (typeof module != 'undefined' && module.exports)
     module.exports = OneSignal;
+}

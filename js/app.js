@@ -1,30 +1,22 @@
 (function () {
 	'use strict';
 	
-	angular.module('listershealth', ['ionic','ionic.service.core', 'listershealth.controllers', 'listershealth.services', 'listershealth.filters', 'ngCordova', 'angular-cache'])
+	angular.module('listershealth', ['ionic','ionic.service.core', 'listershealth.controllers', 'listershealth.services', 'listershealth.filters', 'ngCordova', 'angular-cache', 'angulartics', 'angulartics.google.analytics'])
 	
 	.run(function($ionicPlatform, $ionicPopup) {
 		
 		$ionicPlatform.ready(function() {
-
-		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-		
-		  ga('create', 'UA-73141751-3', 'auto');
-		  ga('send', 'pageview');
-
 			
-			 
 			var notificationOpenedCallback = function(jsonData) {
 				console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
 			};
-	
-			window.plugins.OneSignal.init("9c71e330-258f-4690-ac1d-919de04ed955",
-							 {googleProjectNumber: "861243136791"},
-							 notificationOpenedCallback);
-			window.plugins.OneSignal.enableInAppAlertNotification(true);
+			if(typeof window.plugins.OneSignal != 'undefined'){ 
+				window.plugins.OneSignal.init("9c71e330-258f-4690-ac1d-919de04ed955",
+								 {googleProjectNumber: "861243136791"},
+								 notificationOpenedCallback);
+				window.plugins.OneSignal.enableInAppAlertNotification(true);
+			}
+			
 			
 			//var Pushbots = PushbotsPlugin.initialize("56bddd07177959be178b4567", {"android":{"sender_id":"861243136791"}});
 		});
@@ -38,10 +30,20 @@
 			if (window.StatusBar) {
 			  StatusBar.styleDefault();
 			}
+			if(window.Connection) {
+				if(navigator.connection.type == Connection.NONE) {
+					alert('There is no internet connection available');
+				}else{
+					alert(navigator.connection.type);
+				}
+			}else{
+				alert('Cannot find Window.Connection');
+			}
 
 		});
-		
+		/*
 		$ionicPlatform.registerBackButtonAction(function(event) {
+			
 			if (true) { // your check here
 				$ionicPopup.confirm({
 					title: 'System Warning',
@@ -53,7 +55,14 @@
 				});
 			}
 		  }, 100);
-	  
+		  
+		  $ionicPlatform.registerBackButtonAction(
+            function() {
+                if ($state.current.name == "login") {
+					navigator.app.exitApp();
+				}
+			}, 100);
+	  		*/
 	})
 	
 	.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, CacheFactoryProvider) {
@@ -89,7 +98,7 @@
 			})
 	
 			.state('app.about', {
-				url: '/home/about',
+				url: '/about',
 				views: {
 				'menuContent': {
 					templateUrl: 'templates/about.html'
@@ -98,7 +107,7 @@
 			})
 			
 			.state('app.blog', {
-				url: '/home/blog',
+				url: '/blog',
 				views: {
 				'menuContent': {
 					templateUrl: 'templates/blog-cards.html',
@@ -108,7 +117,7 @@
 			})
 			
 			.state('app.classes', {
-				url: '/home/classes',
+				url: '/classes',
 				views: {
 				'menuContent': {
 					templateUrl: 'templates/classes.html',
@@ -118,7 +127,7 @@
 			})
 			
 			.state('app.contact', {
-				url: '/home/contact',
+				url: '/contact',
 				views: {
 				'menuContent': {
 					templateUrl: 'templates/contact.html'
@@ -127,7 +136,7 @@
 			})
 			
 			.state('app.join', {
-				url: '/home/join',
+				url: '/join',
 				views: {
 				'menuContent': {
 					templateUrl: 'templates/join.html'
@@ -136,7 +145,7 @@
 			})
 			
 			.state('app.timetable', {
-				url: '/home/timetable',
+				url: '/timetable',
 				views: {
 				'menuContent': {
 					templateUrl: 'templates/timetable.html',
@@ -145,7 +154,7 @@
 				}
 			})
 			.state('app.post', {
-				url: "/home/blog/:postId",
+				url: "/blog/:postId",
 				views: {
 				'menuContent': {
 					templateUrl: "templates/post.html",
@@ -155,7 +164,7 @@
 			});
 
 	  	// if none of the above states are matched, use this as the fallback
-	  	$urlRouterProvider.otherwise('/app/home');
+	  	$urlRouterProvider.otherwise('/home');
 	})
 	
 	.constant('$ionicLoadingConfig', {
