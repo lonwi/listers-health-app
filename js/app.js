@@ -3,15 +3,13 @@
 	
 	angular.module('listershealth', ['ionic','ionic.service.core', 'listershealth.controllers', 'listershealth.services', 'listershealth.filters', 'ngCordova', 'angular-cache'])
 	
-	.run(function($ionicPlatform, $ionicPopup, $state,$rootScope) {
+	.run(function($ionicPlatform, $ionicPopup) {
 		
 		$ionicPlatform.ready(function() {
 			if(typeof window.analytics !== 'undefined'){
 				window.analytics.startTrackerWithId('UA-73141751-2');
-				window.analytics.trackView('Home');
-				window.analytics.trackEvent('Home', 'DeviceReady', 'Hits', 1);
 			}
-			console.log($state.current.name);
+			
 		});
 		
 		$ionicPlatform.ready(function() {
@@ -87,7 +85,6 @@
 			}
 		}, 100);
 	  	*/
-			
 		
 	})
 	
@@ -191,6 +188,16 @@
 
 	  	// if none of the above states are matched, use this as the fallback
 	  	$urlRouterProvider.otherwise('/app/home');
+	})
+	
+	.run(function($state, $rootScope) {
+		$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options) {
+			var current_page =  $state.href(toState.name, toParams, {absolute: false});
+			if(typeof window.analytics !== 'undefined'){
+				window.analytics.trackView(current_page);
+			}
+			console.log('Current State: '+current_page);
+		});
 	})
 	
 	.constant('$ionicLoadingConfig', {
