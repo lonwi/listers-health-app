@@ -21,12 +21,10 @@
 			//var Pushbots = PushbotsPlugin.initialize("56bddd07177959be178b4567", {"android":{"sender_id":"861243136791"}});
 		});
 		$ionicPlatform.ready(function() {
-			if(typeof analytics !== 'undefined') {
-                analytics.startTrackerWithId("UA-73141751-2");
-            } else {
-                console.log("Google Analytics Unavailable");
-            }
-			
+			analytics.startTrackerWithId('UA-73141751-2');
+			alert("Start Time");
+    		analytics.trackTiming("app", "start", new Date().getTime() - app.startTime);
+			analytics.trackView('Screen Title')
 		});
 		$ionicPlatform.ready(function() {
 			var admobid = { // for Android
