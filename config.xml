@@ -18,7 +18,7 @@
 	<preference name="android-minSdkVersion" value="16"/>
 	<preference name="BackupWebStorage" value="none"/>
 	<preference name="SplashScreen" value="screen"/>
-	<preference name="SplashScreenDelay" value="10000"/>
+	<preference name="SplashScreenDelay" value="3000"/>
 	<preference name="fullscreen" value="true" />
 	<preference name="orientation" value="portrait" />
 	<feature name="StatusBar">
@@ -38,6 +38,7 @@
 	</platform>
 	
 	<!-- Core plugins -->
+	<gap:plugin name="cordova-plugin-splashscreen" source="npm" />
 
 	<!-- Third party plugins -->
 	<!--<gap:plugin name="pushbots-cordova-plugin" source="npm" />-->
@@ -46,10 +47,7 @@
 	<gap:plugin name="cordova-plugin-admobpro" source="npm" />
 	<gap:plugin name="onesignal-cordova-plugin" source="npm" />
 	
-	<!--<gap:plugin name="cordova-plugin-splashscreen" source="npm" />-->
-	
 	<icon src="icon.png" />
-	<splash src="splash.png" />
 	<platform name="android">
 		<icon src="resources/android/icon/drawable-ldpi-icon.png" density="ldpi"/>
 		<icon src="resources/android/icon/drawable-mdpi-icon.png" density="mdpi"/>
