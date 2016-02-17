@@ -67,5 +67,5 @@
 	<gap:plugin name="cordova-plugin-admobpro" source="npm" />
 	<gap:plugin name="onesignal-cordova-plugin" source="npm" />
 	
-	<gap:plugin name="org.apache.cordova.core.splashscreen" />
+	<gap:plugin name="cordova-plugin-splashscreen" source="npm" />
 </widget>
