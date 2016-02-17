@@ -65,6 +65,6 @@
 		
 	<gap:plugin name="onesignal-cordova-plugin" source="npm" />
 	
-	<gap:plugin name="cordova-plugin-analytics" source="npm" />
+	<gap:plugin name="cordova-plugin-google-analytics" source="npm" />
 	
 </widget>

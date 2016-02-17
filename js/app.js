@@ -16,15 +16,7 @@
 								 notificationOpenedCallback);
 				window.plugins.OneSignal.enableInAppAlertNotification(true);
 			}
-			
-			
 			//var Pushbots = PushbotsPlugin.initialize("56bddd07177959be178b4567", {"android":{"sender_id":"861243136791"}});
-		});
-		$ionicPlatform.ready(function() {
-			analytics.startTrackerWithId('UA-73141751-2');
-			alert("Start Time");
-    		analytics.trackTiming("app", "start", new Date().getTime() - app.startTime);
-			analytics.trackView('Screen Title')
 		});
 		$ionicPlatform.ready(function() {
 			var admobid = { // for Android
@@ -87,14 +79,20 @@
 				});
 			}
 		  }, 100);
-		  
-		  $ionicPlatform.registerBackButtonAction(
-            function() {
-                if ($state.current.name == "login") {
-					navigator.app.exitApp();
-				}
-			}, 100);
-	  		*/
+		*/		  
+		/* 
+		$ionicPlatform.registerBackButtonAction( function() {
+			if ($state.current.name == "app.home") {
+				navigator.app.exitApp();
+			}
+		}, 100);
+	  	*/
+			
+		$ionicPlatform.ready(function() {
+			window.analytics.startTrackerWithId('UA-73141751-2');
+			window.analytics.trackView('Home');
+			window.analytics.trackEvent('Home', 'DeviceReady', 'Hits', 1);
+		});	
 	})
 	
 	.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, CacheFactoryProvider) {
