@@ -3,12 +3,15 @@
 	
 	angular.module('listershealth', ['ionic','ionic.service.core', 'listershealth.controllers', 'listershealth.services', 'listershealth.filters', 'ngCordova', 'angular-cache'])
 	
-	.run(function($ionicPlatform, $ionicPopup) {
+	.run(function($ionicPlatform, $ionicPopup, $state,$rootScope) {
 		
 		$ionicPlatform.ready(function() {
-			window.analytics.startTrackerWithId('UA-73141751-2');
-			window.analytics.trackView('Home');
-			window.analytics.trackEvent('Home', 'DeviceReady', 'Hits', 1);
+			if(typeof window.analytics !== 'undefined'){
+				window.analytics.startTrackerWithId('UA-73141751-2');
+				window.analytics.trackView('Home');
+				window.analytics.trackEvent('Home', 'DeviceReady', 'Hits', 1);
+			}
+			console.log($state.current.name);
 		});
 		
 		$ionicPlatform.ready(function() {

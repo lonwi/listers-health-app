@@ -20,10 +20,12 @@
 	<preference name="SplashScreen" value="screen"/>
 	<preference name="SplashScreenDelay" value="3000"/>
 	<preference name="fullscreen" value="true" />
+	<preference name="orientation" value="portrait" />
 	<feature name="StatusBar">
 		<param name="ios-package" value="CDVStatusBar" onload="true"/>
 	</feature>
 	<icon src="icon.png" />
+	<splash src="splash.png" />
 	<platform name="android">
 		<icon src="resources/android/icon/drawable-ldpi-icon.png" density="ldpi"/>
 		<icon src="resources/android/icon/drawable-mdpi-icon.png" density="mdpi"/>
@@ -61,10 +63,9 @@
 	<!-- Third party plugins -->
 	<!--<gap:plugin name="pushbots-cordova-plugin" source="npm" />-->
 	
-	<gap:plugin name="cordova-plugin-admobpro" source="npm" />
-		
-	<gap:plugin name="onesignal-cordova-plugin" source="npm" />
+	<gap:plugin name="org.apache.cordova.splashscreen" />
 	
 	<gap:plugin name="cordova-plugin-google-analytics" source="npm" />
-	
+	<gap:plugin name="cordova-plugin-admobpro" source="npm" />
+	<gap:plugin name="onesignal-cordova-plugin" source="npm" />
 </widget>
