@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.websquare.listershealth" versionCode="1" version="0.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap = "http://phonegap.com/ns/1.0">
+<widget id="com.websquare.listershealth" versionCode="1" version="0.0.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap = "http://phonegap.com/ns/1.0">
 	<name>Listers Health</name>
 	<description>
 		Listers Health Ladies Gym Sample App
@@ -18,7 +18,7 @@
 	<preference name="android-minSdkVersion" value="16"/>
 	<preference name="BackupWebStorage" value="none"/>
 	<preference name="SplashScreen" value="screen"/>
-	<preference name="SplashScreenDelay" value="5000"/>
+	<preference name="SplashScreenDelay" value="6000"/>
 	<preference name="fullscreen" value="true" />
 	<preference name="orientation" value="portrait" />
 	<feature name="StatusBar">
@@ -50,12 +50,12 @@
 	<icon src="icon.png" />
 	<gap:splash src="splash.png" />
 	<platform name="android">
-		<icon src="resources/android/icon/drawable-ldpi-icon.png" density="ldpi"/>
-		<icon src="resources/android/icon/drawable-mdpi-icon.png" density="mdpi"/>
-		<icon src="resources/android/icon/drawable-hdpi-icon.png" density="hdpi"/>
-		<icon src="resources/android/icon/drawable-xhdpi-icon.png" density="xhdpi"/>
-		<icon src="resources/android/icon/drawable-xxhdpi-icon.png" density="xxhdpi"/>
-		<icon src="resources/android/icon/drawable-xxxhdpi-icon.png" density="xxxhdpi"/>
+		<icon src="resources/android/icon/drawable-ldpi-icon.png" 		density="ldpi"/>
+		<icon src="resources/android/icon/drawable-mdpi-icon.png" 		density="mdpi"/>
+		<icon src="resources/android/icon/drawable-hdpi-icon.png" 		density="hdpi"/>
+		<icon src="resources/android/icon/drawable-xhdpi-icon.png" 		density="xhdpi"/>
+		<icon src="resources/android/icon/drawable-xxhdpi-icon.png" 	density="xxhdpi"/>
+		<icon src="resources/android/icon/drawable-xxxhdpi-icon.png" 	density="xxxhdpi"/>
 	</platform>
 	<gap:splash src="resources/android/splash/drawable-port-ldpi-screen.png"       gap:platform="android" gap:qualifier="port-ldpi" />
     <gap:splash src="resources/android/splash/drawable-port-mdpi-screen.png"       gap:platform="android" gap:qualifier="port-mdpi" />

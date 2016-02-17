@@ -50,7 +50,7 @@
 			if (window.StatusBar) {
 				StatusBar.styleDefault();
 			}
-			/*
+			
 			if(window.Connection) {
 				if(navigator.connection.type == Connection.NONE) {
 					alert('There is no internet connection available');
@@ -60,7 +60,7 @@
 			}else{
 				alert('Cannot find Window.Connection');
 			}
-			*/
+			
 
 		});
 		/*
@@ -79,11 +79,7 @@
 		  }, 100);
 		*/		  
 		/* 
-		$ionicPlatform.registerBackButtonAction( function() {
-			if ($state.current.name == "app.home") {
-				navigator.app.exitApp();
-			}
-		}, 100);
+		
 	  	*/
 		
 	})
@@ -198,6 +194,12 @@
 			}
 			console.log('Current State: '+current_page);
 		});
+		
+		$ionicPlatform.registerBackButtonAction( function() {
+			if ($state.current.name == "app.home") {
+				navigator.app.exitApp();
+			}
+		}, 100);
 	})
 	
 	.constant('$ionicLoadingConfig', {
