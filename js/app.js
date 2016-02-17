@@ -20,13 +20,20 @@
 			
 			//var Pushbots = PushbotsPlugin.initialize("56bddd07177959be178b4567", {"android":{"sender_id":"861243136791"}});
 		});
-		
+		$ionicPlatform.ready(function() {
+			if(typeof analytics !== 'undefined') {
+                analytics.startTrackerWithId("UA-73141751-2");
+            } else {
+                console.log("Google Analytics Unavailable");
+            }
+			
+		});
 		$ionicPlatform.ready(function() {
 			var admobid = { // for Android
 				banner: 'ca-app-pub-3328576052277688/9004819852',
 				//interstitial: 'ca-app-pub-6869992474017983/1657046752'
 			};
-			if (AdMob) {
+			if (typeof AdMob !== 'undefined') {
 				AdMob.createBanner({
 					adId : admobid.banner,
 					position : AdMob.AD_POSITION.BOTTOM_CENTER,
@@ -34,9 +41,6 @@
 				});
 			}
 			
-			
-			analytics.startTrackerWithId('UA-73141751-2');
-			analytics.trackView('Home');
 			
 			/*
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

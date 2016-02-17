@@ -5,6 +5,8 @@
 	
 	.controller('AppCtrl', function($scope, $rootScope, DataLoader) {
 		
+		if(typeof analytics !== 'undefined') { analytics.trackView("Awesome Controller"); }
+		
 		$rootScope.url = 'http://www.listershealth.co.uk/_app_connector.php';
 		$rootScope.lhk = 's5cnJ3KK1gLfBtzwzsRbRMiIVDbzXOMM3f2Io5NSWKpXySu0S9LnZzWSSUOvWjm';
 		
