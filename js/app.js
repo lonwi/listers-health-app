@@ -6,6 +6,12 @@
 	.run(function($ionicPlatform, $ionicPopup) {
 		
 		$ionicPlatform.ready(function() {
+			window.analytics.startTrackerWithId('UA-73141751-2');
+			window.analytics.trackView('Home');
+			window.analytics.trackEvent('Home', 'DeviceReady', 'Hits', 1);
+		});
+		
+		$ionicPlatform.ready(function() {
 			
 			var notificationOpenedCallback = function(jsonData) {
 				console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
@@ -18,6 +24,7 @@
 			}
 			//var Pushbots = PushbotsPlugin.initialize("56bddd07177959be178b4567", {"android":{"sender_id":"861243136791"}});
 		});
+		
 		$ionicPlatform.ready(function() {
 			var admobid = { // for Android
 				banner: 'ca-app-pub-3328576052277688/9004819852',
@@ -30,18 +37,8 @@
 					autoShow : true
 				});
 			}
-			
-			
-			/*
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-			
-			  ga('create', 'UA-73141751-3', 'auto');
-			*/  
+
 		});
-			
 		
 		$ionicPlatform.ready(function() {
 			
@@ -88,11 +85,7 @@
 		}, 100);
 	  	*/
 			
-		$ionicPlatform.ready(function() {
-			window.analytics.startTrackerWithId('UA-73141751-2');
-			window.analytics.trackView('Home');
-			window.analytics.trackEvent('Home', 'DeviceReady', 'Hits', 1);
-		});	
+		
 	})
 	
 	.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, CacheFactoryProvider) {
