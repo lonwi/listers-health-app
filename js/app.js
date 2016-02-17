@@ -34,10 +34,9 @@
 				});
 			}
 			
-			if(window.analytics){ 
-				window.analytics.startTrackerWithId('UA-73141751-2');
-				window.analytics.trackView('Home');
-			}
+			
+			analytics.startTrackerWithId('UA-73141751-2');
+			analytics.trackView('Home');
 			
 			/*
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
