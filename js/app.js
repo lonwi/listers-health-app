@@ -219,7 +219,7 @@
 						console.log("User canceled exit.");
 					});
 				} else {
-					$state.go('/app/home')
+					$state.go('/app/home');
 				}
 			}
 		e.preventDefault();
