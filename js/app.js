@@ -206,17 +206,20 @@
 			if ($ionicHistory.backView()) {
 				$ionicHistory.goBack();
 			} else {
-			
-				var confirmPopup = $ionicPopup.confirm({
-					title: 'Confirm Exit',
-					template: "Are you sure you want to exit?"
-				});
-				confirmPopup.then(function (close) {
-					if (close) {
-						ionic.Platform.exitApp();
-					}
-					console.log("User canceled exit.");
-				});
+				if ($state.current.name == "app.home") {
+					var confirmPopup = $ionicPopup.confirm({
+						title: 'Confirm Exit',
+						template: "Are you sure you want to exit?"
+					});
+					confirmPopup.then(function (close) {
+						if (close) {
+							ionic.Platform.exitApp();
+						}
+						console.log("User canceled exit.");
+					});
+				} else {
+					$state.go('/app/home')
+				}
 			}
 		e.preventDefault();
 		return false;
