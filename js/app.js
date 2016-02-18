@@ -31,6 +31,7 @@
 				banner: 'ca-app-pub-3328576052277688/9004819852',
 				//interstitial: 'ca-app-pub-6869992474017983/1657046752'
 			};
+			/*
 			if (typeof AdMob !== 'undefined') {
 				AdMob.createBanner({
 					adId : admobid.banner,
@@ -38,7 +39,7 @@
 					autoShow : true
 				});
 			}
-
+			*/
 		});
 		
 		$ionicPlatform.ready(function() {
