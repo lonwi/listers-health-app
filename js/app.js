@@ -50,18 +50,6 @@
 			if (window.StatusBar) {
 				StatusBar.styleDefault();
 			}
-			
-			if(window.Connection) {
-				if(navigator.connection.type == Connection.NONE) {
-					alert('There is no internet connection available');
-				}else{
-					alert(navigator.connection.type);
-				}
-			}else{
-				alert('Cannot find Window.Connection');
-			}
-			
-
 		});
 		/*
 		$ionicPlatform.registerBackButtonAction(function(event) {
