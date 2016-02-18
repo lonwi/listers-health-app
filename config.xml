@@ -38,7 +38,7 @@
 	</platform>
 	
 	<!-- Core plugins -->
-	<gap:plugin name="cordova-plugin-splashscreen" source="npm" />
+	<!--<gap:plugin name="cordova-plugin-splashscreen" source="npm" />-->
 
 	<!-- Third party plugins -->
 	<!--<gap:plugin name="pushbots-cordova-plugin" source="npm" />-->
