@@ -39,6 +39,8 @@
 	
 	<!-- Core plugins -->
 	<gap:plugin name="cordova-plugin-splashscreen" source="npm" />
+	<gap:plugin name="org.apache.cordova.camera" />
+    <gap:plugin name="org.apache.cordova.media-capture" />
 
 	<!-- Third party plugins -->
 	<!--<gap:plugin name="pushbots-cordova-plugin" source="npm" />-->
@@ -46,6 +48,7 @@
 	<gap:plugin name="cordova-plugin-google-analytics" source="npm" />
 	<gap:plugin name="cordova-plugin-admobpro" source="npm" />
 	<gap:plugin name="onesignal-cordova-plugin" source="npm" />
+	<gap:plugin name="cordova-plugin-local-notifications" source="npm" />
 	
 	<icon src="icon.png" />
 	<gap:splash src="splash.png" />

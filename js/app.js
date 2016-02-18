@@ -207,14 +207,14 @@
 			if ($ionicHistory.backView()) {
 				$ionicHistory.goBack();
 			} else {
-				if ($state.current.name == "app.home") {
+				if ($state.current.name === "app.home") {
 					var confirmPopup = $ionicPopup.confirm({
 						title: 'Confirm Exit',
 						template: "Are you sure you want to exit?"
 					});
 					confirmPopup.then(function (close) {
 						if (close) {
-							ionic.Platform.exitApp();
+							$ionicPlatform.exitApp();
 						}
 						console.log("User canceled exit.");
 					});
