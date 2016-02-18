@@ -186,7 +186,7 @@
 	  	$urlRouterProvider.otherwise('/app/home');
 	})
 	
-	.run(function($ionicPlatform, $ionicPopup, $state, $rootScope) {
+	.run(function($ionicPlatform, $ionicPopup, $ionicHistory, $state, $rootScope) {
 		$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options) {
 			var current_page =  $state.href(toState.name, toParams, {absolute: false});
 			if(typeof window.analytics !== 'undefined'){
@@ -214,7 +214,7 @@
 				confirmPopup.then(function (close) {
 					if (close) {
 						ionic.Platform.exitApp();
-					} // otherwise do nothing
+					}
 					console.log("User canceled exit.");
 				});
 			}
