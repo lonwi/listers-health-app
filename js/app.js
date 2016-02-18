@@ -50,6 +50,18 @@
 			if (window.StatusBar) {
 				StatusBar.styleDefault();
 			}
+			
+			if(window.Connection) {
+				if(navigator.connection.type == Connection.NONE) {
+					alert('There is no internet connection available');
+				}else{
+					alert(navigator.connection.type);
+				}
+			}else{
+				alert('Cannot find Window.Connection');
+			}
+			
+
 		});
 		/*
 		$ionicPlatform.registerBackButtonAction(function(event) {
@@ -174,7 +186,7 @@
 	  	$urlRouterProvider.otherwise('/app/home');
 	})
 	
-	.run(function($state, $rootScope) {
+	.run(function($ionicPlatform, $ionicPopup, $state, $rootScope) {
 		$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options) {
 			var current_page =  $state.href(toState.name, toParams, {absolute: false});
 			if(typeof window.analytics !== 'undefined'){
