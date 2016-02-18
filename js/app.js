@@ -194,12 +194,33 @@
 			}
 			console.log('Current State: '+current_page);
 		});
-		
+		/*
 		$ionicPlatform.registerBackButtonAction( function() {
 			if ($state.current.name == "app.home") {
 				navigator.app.exitApp();
+			}else{
 			}
 		}, 100);
+		*/
+		$ionicPlatform.registerBackButtonAction(function (e) {
+			if ($ionicHistory.backView()) {
+				$ionicHistory.goBack();
+			} else {
+			
+				var confirmPopup = $ionicPopup.confirm({
+					title: 'Confirm Exit',
+					template: "Are you sure you want to exit?"
+				});
+				confirmPopup.then(function (close) {
+					if (close) {
+						ionic.Platform.exitApp();
+					} // otherwise do nothing
+					console.log("User canceled exit.");
+				});
+			}
+		e.preventDefault();
+		return false;
+		}, 101);
 	})
 	
 	.constant('$ionicLoadingConfig', {
