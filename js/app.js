@@ -52,7 +52,7 @@
 				StatusBar.styleDefault();
 			}
 			
-			if(window.Connection) {
+			if(navigator.connection) {
                 if(navigator.connection.type == Connection.NONE) {
                     $ionicPopup.confirm({
                         title: "No Internet Connection",

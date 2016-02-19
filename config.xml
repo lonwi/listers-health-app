@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.websquare.listershealth" versionCode="1" version="0.0.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap = "http://phonegap.com/ns/1.0">
+<widget id="com.websquare.listershealth" versionCode="1" version="0.0.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap = "http://phonegap.com/ns/1.0">
 	<name>Listers Health</name>
 	<description>
 		Listers Health Ladies Gym Sample App
@@ -41,6 +41,7 @@
 	<gap:plugin name="cordova-plugin-splashscreen" source="npm" />
 	<gap:plugin name="org.apache.cordova.camera" />
     <gap:plugin name="org.apache.cordova.media-capture" />
+	<gap:plugin name="org.apache.cordova.vibration" />
 
 	<!-- Third party plugins -->
 	<!--<gap:plugin name="pushbots-cordova-plugin" source="npm" />-->
@@ -48,7 +49,7 @@
 	<gap:plugin name="cordova-plugin-google-analytics" source="npm" />
 	<gap:plugin name="cordova-plugin-admobpro" source="npm" />
 	<gap:plugin name="onesignal-cordova-plugin" source="npm" />
-	<gap:plugin name="cordova-plugin-local-notifications" source="npm" />
+	<gap:plugin name="cordova-plugin-local-notifications-mm" source="npm" />
 	
 	<icon src="icon.png" />
 	<gap:splash src="splash.png" />
