@@ -7,7 +7,7 @@
 		
 		$ionicPlatform.ready(function() {
 			if(typeof window.analytics !== 'undefined'){
-				window.analytics.startTrackerWithId('UA-73141751-2');
+				window.analytics.startTrackerWithId('UA-74053231-1');
 			}
 			
 		});
@@ -53,35 +53,21 @@
 			}
 			
 			if(window.Connection) {
-				if(navigator.connection.type == Connection.NONE) {
-					alert('There is no internet connection available');
-				}else{
-					alert(navigator.connection.type);
-				}
-			}else{
-				alert('Cannot find Window.Connection');
-			}
+                if(navigator.connection.type == Connection.NONE) {
+                    $ionicPopup.confirm({
+                        title: "No Internet Connection",
+                        content: "The internet is disconnected on your device."
+                    })
+                    .then(function(result) {
+                        if(!result) {
+                            ionic.Platform.exitApp();
+                        }
+                    });
+                }
+            }
 			
 
 		});
-		/*
-		$ionicPlatform.registerBackButtonAction(function(event) {
-			
-			if (true) { // your check here
-				$ionicPopup.confirm({
-					title: 'System Warning',
-					template: 'Are you sure you want to exit?'
-				}).then(function(res) {
-					if (res) {
-					  ionic.Platform.exitApp();
-					}
-				});
-			}
-		  }, 100);
-		*/		  
-		/* 
-		
-	  	*/
 		
 	})
 	
@@ -182,8 +168,6 @@
 					}
 				}
 			});
-
-	  	// if none of the above states are matched, use this as the fallback
 	  	$urlRouterProvider.otherwise('/app/home');
 	})
 	
@@ -195,14 +179,7 @@
 			}
 			console.log('Current State: '+current_page);
 		});
-		/*
-		$ionicPlatform.registerBackButtonAction( function() {
-			if ($state.current.name == "app.home") {
-				navigator.app.exitApp();
-			}else{
-			}
-		}, 100);
-		*/
+
 		$ionicPlatform.registerBackButtonAction(function (e) {
 			if ($ionicHistory.backView()) {
 				$ionicHistory.goBack();
@@ -219,7 +196,7 @@
 						console.log("User canceled exit.");
 					});
 				} else {
-					$state.go('/app/home');
+					$state.go('app.home');
 				}
 			}
 		e.preventDefault();
@@ -228,7 +205,8 @@
 	})
 	
 	.constant('$ionicLoadingConfig', {
-		template: 'Loading...'
+		template: '<ion-spinner icon="android" class="spinner-balanced"></ion-spinner>',
+		noBackdrop: true,
 	})
 	
 	;

@@ -632,11 +632,11 @@ $popup-button-min-height:         45px !default;
 // Loading
 // -------------------------------
 
-$loading-text-color:              #fff !default;
-$loading-bg-color:                rgba(0,0,0,0.7) !default;
-$loading-padding:                 20px !default;
-$loading-border-radius:           5px !default;
-$loading-font-size:               15px !default;
+$loading-text-color:              $balanced !default;
+$loading-bg-color:                rgba(255,255,255,1) !default;
+$loading-padding:                 0 !default;
+$loading-border-radius:           0 !default;
+$loading-font-size:               16px !default;
 
 $loading-backdrop-fadein-duration:0.1s !default;
 $loading-backdrop-bg-color:       rgba(0,0,0,0.4) !default;
@@ -684,8 +684,8 @@ $badge-default-text:              #AAAAAA !default;
 // Spinners
 // -------------------------------
 
-$spinner-width:                   28px !default;
-$spinner-height:                  28px !default;
+$spinner-width:                   36px !default;
+$spinner-height:                  36px !default;
 
 $spinner-light-stroke:            $light !default;
 $spinner-light-fill:              $light !default;
