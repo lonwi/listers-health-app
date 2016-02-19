@@ -181,21 +181,21 @@
 		});
 
 		$ionicPlatform.registerBackButtonAction(function (e) {
-			if ($ionicHistory.backView()) {
-				$ionicHistory.goBack();
+			if ($state.current.name === "app.home") {
+				var confirmPopup = $ionicPopup.confirm({
+					title: 'Confirm Exit',
+					template: "Are you sure you want to exit?"
+				});
+				confirmPopup.then(function (close) {
+					if (close) {
+						$ionicPlatform.exitApp();
+					}
+					console.log("User canceled exit.");
+				});
 			} else {
-				if ($state.current.name === "app.home") {
-					var confirmPopup = $ionicPopup.confirm({
-						title: 'Confirm Exit',
-						template: "Are you sure you want to exit?"
-					});
-					confirmPopup.then(function (close) {
-						if (close) {
-							$ionicPlatform.exitApp();
-						}
-						console.log("User canceled exit.");
-					});
-				} else {
+				if ($ionicHistory.backView()) {
+					$ionicHistory.goBack();
+				}else{
 					$state.go('app.home');
 				}
 			}
