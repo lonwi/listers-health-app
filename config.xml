@@ -47,7 +47,7 @@
 	<gap:plugin name="cordova-plugin-google-analytics" source="npm" />
 	<gap:plugin name="cordova-plugin-admobpro" source="npm" />
 	<gap:plugin name="onesignal-cordova-plugin" source="npm" />
-	<gap:plugin name="de.appplant.cordova.plugin.local-notification" />
+	<gap:plugin name="cordova-plugin-local-notifications-mm" source="npm" />
 	
 	<icon src="icon.png" />
 	<gap:splash src="splash.png" />
