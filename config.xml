@@ -26,7 +26,7 @@
 	</feature>
 	
 	<access origin="*"/>
-	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
+	<plugin name="cordova-plugin-whitelist" source="npm" />
 	<allow-intent href="http://*/*" />
 	<allow-intent href="https://*/*" />
 	<allow-intent href="tel:*" />
@@ -38,17 +38,17 @@
 	</platform>
 	
 	<!-- Core plugins -->
-	<gap:plugin name="cordova-plugin-device" source="npm" />
-	<gap:plugin name="cordova-plugin-splashscreen" source="npm" />
-	<gap:plugin name="cordova-plugin-vibration" source="npm" />
+	<plugin name="cordova-plugin-device" source="npm" />
+	<plugin name="cordova-plugin-splashscreen" source="npm" />
+	<plugin name="cordova-plugin-vibration" source="npm" />
 
 	<!-- Third party plugins -->
 	<!--<gap:plugin name="pushbots-cordova-plugin" source="npm" />-->
 	
-	<gap:plugin name="cordova-plugin-google-analytics" source="npm" />
-	<gap:plugin name="cordova-plugin-admobpro" source="npm" />
-	<gap:plugin name="cordova-plugin-local-notifications-pgb" source="npm" />
-	<gap:plugin name="onesignal-cordova-plugin" source="npm" />
+	<plugin name="cordova-plugin-google-analytics" source="npm" />
+	<plugin name="cordova-plugin-admobpro" source="npm" />
+	<plugin name="cordova-plugin-local-notifications-mm" source="npm" />
+	<plugin name="onesignal-cordova-plugin" source="npm" />
 	
 	
 	<icon src="icon.png" />
