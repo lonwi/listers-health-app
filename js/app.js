@@ -167,7 +167,18 @@
 					controller: 'PostCtrl'
 					}
 				}
-			});
+			})
+			.state('app.notifications', {
+				url: "/notifications",
+				views: {
+				'menuContent': {
+					templateUrl: "templates/notifications.html",
+					controller: 'NotificationController'
+					}
+				}
+			})
+			
+			;
 	  	$urlRouterProvider.otherwise('/app/home');
 	})
 	

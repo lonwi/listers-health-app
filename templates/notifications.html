@@ -1,0 +1,19 @@
+<ion-view view-title="Notifications">
+    <ion-content has-header="true" class="has-footer">
+    	<button class="button button-full button-positive" ng-click="scheduleSingleNotification()">
+          Show Local Notification (1)
+        </button>   
+        <button class="button button-full button-positive" ng-click="scheduleDelayedNotification()">
+          Show Local Notification After 10 sec (2)
+        </button>     
+        <button class="button button-full button-positive" ng-click="scheduleEveryMinuteNotification()">
+          Show Local Notification Every 1 min (3)
+        </button> 
+        <button class="button button-full button-positive" ng-click="updateSingleNotification()">
+          Update Notification 2 (after 10 sec)
+        </button> 
+        <button class="button button-full button-positive" ng-click="cancelSingleNotification()">
+          Cancel Notification 3 (every 1 min)
+        </button> 
+    </ion-content>
+</ion-view>

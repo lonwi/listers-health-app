@@ -156,7 +156,7 @@
 		};
 	})
 	
-	.controller('TimetableCtrl', function($scope, $rootScope, DataLoader, $http, $ionicLoading, $timeout, CacheFactory, $cordovaLocalNotification) {
+	.controller('TimetableCtrl', function($scope, $rootScope, $ionicPlatform, DataLoader, $http, $ionicLoading, $timeout, CacheFactory, $cordovaLocalNotification) {
 		
 		if ( ! CacheFactory.get('timetableCache') ) {
 			CacheFactory.createCache('timetableCache');
@@ -181,28 +181,6 @@
 				$ionicLoading.hide();
 			}
 		};
-		
-		$scope.add = function() {
-			var alarmTime = new Date();
-			alarmTime.setMinutes(alarmTime.getMinutes() + 1);
-			$cordovaLocalNotification.add({
-				id: "1234",
-				date: alarmTime,
-				message: "This is a message",
-				title: "This is a title",
-				autoCancel: true,
-				sound: null
-			}).then(function () {
-				console.log("The notification has been set");
-			});
-		};
-	 
-		$scope.isScheduled = function() {
-			$cordovaLocalNotification.isScheduled("1234").then(function(isScheduled) {
-				alert("Notification 1234 Scheduled: " + isScheduled);
-			});
-		}
-	
 	})
 	
 	.controller('ClassCtrl', function($scope, $rootScope) {
@@ -282,8 +260,68 @@
 			// Execute action
 		});
     
-	});
+	})
 	
+	.controller('NotificationController', function($scope, $cordovaLocalNotification, $ionicPlatform) {
+     
+		$ionicPlatform.ready(function () {
+			 
+			$scope.scheduleSingleNotification = function () {
+			  $cordovaLocalNotification.schedule({
+				id: 1,
+				title: 'Warning',
+				text: 'Youre so sexy!',
+				data: {
+				  customProperty: 'custom value'
+				}
+			  }).then(function (result) {
+				console.log('Notification 1 triggered');
+			  });
+			};
+			 
+			$scope.scheduleDelayedNotification = function () {
+			  var now = new Date().getTime();
+			  var _10SecondsFromNow = new Date(now + 10 * 1000);
+	 
+			  $cordovaLocalNotification.schedule({
+				id: 2,
+				title: 'Warning',
+				text: 'Im so late',
+				at: _10SecondsFromNow
+			  }).then(function (result) {
+				console.log('Notification 2 triggered');
+			  });
+			};
+	 
+			$scope.scheduleEveryMinuteNotification = function () {
+			  $cordovaLocalNotification.schedule({
+				id: 3,
+				title: 'Warning',
+				text: 'Dont fall asleep',
+				every: 'minute'
+			  }).then(function (result) {
+				console.log('Notification 3 triggered');
+			  });
+			};      
+			 
+			$scope.updateSingleNotification = function () {
+			  $cordovaLocalNotification.update({
+				id: 2,
+				title: 'Warning Update',
+				text: 'This is updated text!'
+			  }).then(function (result) {
+				console.log('Notification 1 Updated');
+			  });
+			};  
+	 
+			$scope.cancelSingleNotification = function () {
+			  $cordovaLocalNotification.cancel(3).then(function (result) {
+				console.log('Notification 3 Canceled');
+			  });
+			};      
+			 
+		});
+	});
 	
 	
 }());
