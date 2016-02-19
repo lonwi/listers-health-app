@@ -48,7 +48,6 @@
 	
 	<plugin name="cordova-plugin-google-analytics" source="npm" />
 	<plugin name="cordova-plugin-admobpro" source="npm" />
-	<plugin name="cordova-plugin-local-notifications" source="npm" />
 	<plugin spec="https://github.com/lonwi/cordova-plugin-local-notifications-pgb.git" source="git" />
 	<plugin name="onesignal-cordova-plugin" source="npm" />
 	
