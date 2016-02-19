@@ -199,7 +199,7 @@
 				});
 				confirmPopup.then(function (close) {
 					if (close) {
-						$ionicPlatform.exitApp();
+						ionic.Platform.exitApp();
 					}
 					console.log("User canceled exit.");
 				});
