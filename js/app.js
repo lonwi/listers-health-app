@@ -52,17 +52,20 @@
 				//StatusBar.styleDefault();
 			}
 				
-			if(navigator.connection && navigator.connection.type != "none"){
-				$ionicPopup.confirm({
-					title: "No Internet Connection",
-					content: "It looks like your device the internet is disconnected on your device. Please connect to the internet. Do you wish to continue?"
-				})
-				.then(function(result) {
-					if(!result) {
-						ionic.Platform.exitApp();
-					}
-				});
-			}
+			//if(navigator.connection){
+				console.log('Connection:' +navigator.connection.type);	
+				if($cordovaNetwork.isOffline()){
+					$ionicPopup.confirm({
+						title: "No Internet Connection",
+						content: "It looks like your device the internet is disconnected on your device. Please connect to the internet. Do you wish to continue?"
+					})
+					.then(function(result) {
+						if(!result) {
+							ionic.Platform.exitApp();
+						}
+					});
+				}
+			//}
 		});
 		
 		$ionicPlatform.on('resume', function(event) {
