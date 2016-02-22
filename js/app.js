@@ -65,8 +65,9 @@
                     });
                 }
             }
+			console.log('Loaded');
 			
-			if(window.cordova && window.cordova.plugins.BarTinter) {
+			if(BarTinter) {
 				console.log('Should Work');
 				BarTinter.statusColor("#000000");
 				BarTinter.navigationColor("#000000");  
