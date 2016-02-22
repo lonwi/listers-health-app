@@ -3,7 +3,7 @@
 	
 	angular.module('listershealth', ['ionic','ionic.service.core', 'listershealth.controllers', 'listershealth.services', 'listershealth.filters', 'ngCordova', 'angular-cache'])
 	
-	.run(function($ionicPlatform, $ionicPopup) {
+	.run(function($ionicPlatform, $ionicPopup, $ionicHistory, $state, $rootScope) {
 		
 		$ionicPlatform.ready(function() {
 			if(typeof window.analytics !== 'undefined'){
@@ -65,11 +65,59 @@
                     });
                 }
             }
+			
+			var type = $cordovaNetwork.getNetwork();
+			var isOnline = $cordovaNetwork.isOnline();
+			var isOffline = $cordovaNetwork.isOffline();
+			
+			if(isOffline){
+				$ionicPopup.confirm({
+					title: "No Internet Connection",
+					content: "The internet is disconnected on your device."
+				})
+				.then(function(result) {
+					if(!result) {
+						ionic.Platform.exitApp();
+					}
+				});
+			}
+			
 		});
 		
 		$ionicPlatform.on('resume', function(event) {
 			console.log('app resume event', event);
 		});
+		
+		$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options) {
+			var current_page =  $state.href(toState.name, toParams, {absolute: false});
+			if(typeof window.analytics !== 'undefined'){
+				window.analytics.trackView(current_page);
+				console.log('Current State: '+current_page);
+			}
+		});
+
+		$ionicPlatform.registerBackButtonAction(function (e) {
+			if ($state.current.name === "app.home") {
+				var confirmPopup = $ionicPopup.confirm({
+					title: 'Confirm Exit',
+					template: "Are you sure you want to exit?"
+				});
+				confirmPopup.then(function (close) {
+					if (close) {
+						ionic.Platform.exitApp();
+					}
+					console.log("User canceled exit.");
+				});
+			} else {
+				if ($ionicHistory.backView()) {
+					$ionicHistory.goBack();
+				}else{
+					$state.go('app.home');
+				}
+			}
+		e.preventDefault();
+		return false;
+		}, 101);
 		
 	})
 	
@@ -191,39 +239,6 @@
 			
 			;
 	  	$urlRouterProvider.otherwise('/app/home');
-	})
-	
-	.run(function($ionicPlatform, $ionicPopup, $ionicHistory, $state, $rootScope) {
-		$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options) {
-			var current_page =  $state.href(toState.name, toParams, {absolute: false});
-			if(typeof window.analytics !== 'undefined'){
-				window.analytics.trackView(current_page);
-				console.log('Current State: '+current_page);
-			}
-		});
-
-		$ionicPlatform.registerBackButtonAction(function (e) {
-			if ($state.current.name === "app.home") {
-				var confirmPopup = $ionicPopup.confirm({
-					title: 'Confirm Exit',
-					template: "Are you sure you want to exit?"
-				});
-				confirmPopup.then(function (close) {
-					if (close) {
-						ionic.Platform.exitApp();
-					}
-					console.log("User canceled exit.");
-				});
-			} else {
-				if ($ionicHistory.backView()) {
-					$ionicHistory.goBack();
-				}else{
-					$state.go('app.home');
-				}
-			}
-		e.preventDefault();
-		return false;
-		}, 101);
 	})
 	
 	.constant('$ionicLoadingConfig', {
