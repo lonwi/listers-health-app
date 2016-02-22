@@ -65,6 +65,10 @@
                     });
                 }
             }
+			
+			if(window.cordova && BarTinter) {
+				BarTinter.statusColor("#000000"); 
+			}
 
 		});
 		
