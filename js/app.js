@@ -3,7 +3,7 @@
 	
 	angular.module('listershealth', ['ionic','ionic.service.core', 'listershealth.controllers', 'listershealth.services', 'listershealth.filters', 'ngCordova', 'angular-cache'])
 	
-	.run(function($ionicPlatform, $ionicPopup, $ionicHistory, $state, $rootScope) {
+	.run(function($ionicPlatform, $ionicPopup, $ionicHistory, $state, $rootScope, $cordovaNetwork) {
 		
 		$ionicPlatform.ready(function() {
 			if(typeof window.analytics !== 'undefined'){
@@ -51,29 +51,11 @@
 			if (window.StatusBar) {
 				//StatusBar.styleDefault();
 			}
-			
-			if(navigator.connection) {
-                if(navigator.connection.type == Connection.NONE) {
-                    $ionicPopup.confirm({
-                        title: "No Internet Connection",
-                        content: "The internet is disconnected on your device."
-                    })
-                    .then(function(result) {
-                        if(!result) {
-                            ionic.Platform.exitApp();
-                        }
-                    });
-                }
-            }
-			
-			var type = $cordovaNetwork.getNetwork();
-			var isOnline = $cordovaNetwork.isOnline();
-			var isOffline = $cordovaNetwork.isOffline();
-			
-			if(isOffline){
+				
+			if(navigator.connection && navigator.connection.type != "none"){
 				$ionicPopup.confirm({
 					title: "No Internet Connection",
-					content: "The internet is disconnected on your device."
+					content: "It looks like your device the internet is disconnected on your device. Please connect to the internet. Do you wish to continue?"
 				})
 				.then(function(result) {
 					if(!result) {
@@ -81,7 +63,6 @@
 					}
 				});
 			}
-			
 		});
 		
 		$ionicPlatform.on('resume', function(event) {

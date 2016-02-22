@@ -616,15 +616,15 @@ $sheet-options-border-color:      #d1d3d6 !default;
 // Popups
 // -------------------------------
 
-$popup-width:                     250px !default;
+$popup-width:                     280px !default;
 $popup-enter-animation:           superScaleIn !default;
 $popup-enter-animation-duration:  0.2s !default;
 $popup-leave-animation-duration:  0.1s !default;
 
-$popup-border-radius:             0px !default;
-$popup-background-color:          rgba(255,255,255,0.9) !default;
+$popup-border-radius:             5px !default;
+$popup-background-color:          rgba(255,255,255,1) !default;
 
-$popup-button-border-radius:      2px !default;
+$popup-button-border-radius:      1px !default;
 $popup-button-line-height:        20px !default;
 $popup-button-min-height:         45px !default;
 
