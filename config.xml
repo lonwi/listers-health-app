@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.websquare.listershealth" versionCode="1" version="0.0.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap = "http://phonegap.com/ns/1.0">
+<widget id="com.websquare.listershealth" versionCode="1" version="0.0.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap = "http://phonegap.com/ns/1.0">
 	<name>Listers Health</name>
 	<description>
-		Listers Health Ladies Gym Sample App
+		Listers Health Ladies Gym Members App
 	</description>
 	<author email="wojciech@websquare.co.uk" href="http://www.websquare.co.uk">
 		Websquare

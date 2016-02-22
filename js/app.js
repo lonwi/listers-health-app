@@ -66,8 +66,9 @@
                 }
             }
 			
-			if(window.cordova && BarTinter) {
-				BarTinter.statusColor("#000000"); 
+			if(window.cordova && window.cordova.plugins.BarTinter) {
+				BarTinter.statusColor("#000000");
+				BarTinter.navigationColor("#000000");  
 			}
 
 		});
