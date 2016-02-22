@@ -142,6 +142,13 @@
 				$ionicLoading.hide();
 			}
 		};
+		
+		$scope.scheduleClassNotification = function ($id, $name, $day, $time) {
+			console.log('ID: '+$id);
+			console.log('Name: '+$id);
+			console.log('Day: '+$id);
+			console.log('Time: '+$id);
+		};
 	})
 	
 	.controller('ClassCtrl', function($scope, $rootScope, localClasses) {
@@ -221,6 +228,10 @@
 			// Execute action
 		});
     
+	})
+	
+	.controller('SettingsCtrl', function($scope, $rootScope) {
+
 	})
 	
 	.controller('NotificationController', function($scope, $cordovaLocalNotification, $ionicPlatform) {

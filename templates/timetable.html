@@ -19,7 +19,7 @@
         	<ion-nav-view name="tab-tuesday">
             	<ion-content padding="true" has-header="true" class="has-footer">
                     <ion-list>
-                        <ion-item ng-repeat="class in classes" class="">
+                        <ion-item ng-repeat="class in classes" class="" ng-click="scheduleClassNotification(class.id, class.class_id, class.title, class.start, class.weekday)">
                         	<h2>{{class.title}}</h2>
                 			<h4>{{class.start}} - {{class.end}}</h4>
                         </ion-item>

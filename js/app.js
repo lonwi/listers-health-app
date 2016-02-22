@@ -49,7 +49,7 @@
 				cordova.plugins.Keyboard.disableScroll(true);
 			}
 			if (window.StatusBar) {
-				StatusBar.styleDefault();
+				//StatusBar.styleDefault();
 			}
 			
 			if(navigator.connection) {
@@ -68,10 +68,7 @@
 		});
 		
 	})
-	
-	.run(function($cordovaStatusbar) {
-		$cordovaStatusbar.styleColor('black');
-	})
+
 	
 	.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, CacheFactoryProvider) {
 		angular.extend(CacheFactoryProvider.defaults, { 
@@ -167,6 +164,15 @@
 				'menuContent': {
 					templateUrl: "templates/post.html",
 					controller: 'PostCtrl'
+					}
+				}
+			})
+			.state('app.settings', {
+				url: "/settings",
+				views: {
+				'menuContent': {
+					templateUrl: "templates/settings.html",
+					controller: 'SettingsCtrl'
 					}
 				}
 			})
