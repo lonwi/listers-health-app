@@ -67,8 +67,11 @@
             }
 		});
 		
+		$ionicPlatform.on('resume', function(event) {
+			console.log('app resume event', event);
+		});
+		
 	})
-
 	
 	.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, CacheFactoryProvider) {
 		angular.extend(CacheFactoryProvider.defaults, { 
@@ -195,8 +198,8 @@
 			var current_page =  $state.href(toState.name, toParams, {absolute: false});
 			if(typeof window.analytics !== 'undefined'){
 				window.analytics.trackView(current_page);
+				console.log('Current State: '+current_page);
 			}
-			console.log('Current State: '+current_page);
 		});
 
 		$ionicPlatform.registerBackButtonAction(function (e) {

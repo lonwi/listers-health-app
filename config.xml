@@ -49,6 +49,7 @@
 	<plugin name="cordova-plugin-google-analytics" source="npm" />
 	<plugin name="cordova-plugin-admobpro" source="npm" />
 	<plugin name="cordova-plugin-statusbar" source="npm" />
+	<plugin name="cordova-plugin-network-information" source="npm" />
 	<plugin spec="https://github.com/katzer/cordova-plugin-local-notifications.git" source="git" />
 	<plugin name="onesignal-cordova-plugin" source="npm" />
 	
