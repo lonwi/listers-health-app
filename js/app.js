@@ -65,16 +65,12 @@
                     });
                 }
             }
-			console.log('Loaded');
-			
-			if(BarTinter) {
-				console.log('Should Work');
-				BarTinter.statusColor("#000000");
-				BarTinter.navigationColor("#000000");  
-			}
-
 		});
 		
+	})
+	
+	.run(function($cordovaStatusbar) {
+		$cordovaStatusbar.styleColor('black');
 	})
 	
 	.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, CacheFactoryProvider) {
