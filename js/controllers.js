@@ -118,41 +118,41 @@
 	})
 	
 	.controller('TimetableCtrl', function($scope, $rootScope, $ionicPlatform, DataLoader, $http, $ionicLoading, $timeout, CacheFactory, $cordovaLocalNotification, $ionicPopup, appConnector) {
-	
+		
+		if ( ! CacheFactory.get('timetableCache') ) {
+			CacheFactory.createCache('timetableCache');
+		}
+		var timetableCache = CacheFactory.get( 'timetableCache' );
+
+		$scope.loadTimetable = function($daycode) {
+			var timetableApi = appConnector.url()+'?lhk='+appConnector.key()+'&type=timetable&daycode='+$daycode+'';
+			$ionicLoading.show();
+			if( !timetableCache.get( $daycode ) ) {
+				DataLoader.get( timetableApi ).then(function(response) {
+					$scope.classes = response.data.data;
+					
+					timetableCache.put( $daycode, response.data.data );
+					
+					$ionicLoading.hide();
+				}, function(response) {
+					$ionicLoading.hide();
+				});
+			} else {
+				$scope.classes = timetableCache.get( $daycode );
+				$ionicLoading.hide();
+			}
+		};
+		
 		$ionicPlatform.ready(function () {
 			
-			if ( ! CacheFactory.get('timetableCache') ) {
-				CacheFactory.createCache('timetableCache');
-			}
-			var timetableCache = CacheFactory.get( 'timetableCache' );
-	
-			$scope.loadTimetable = function($daycode) {
-				var timetableApi = appConnector.url()+'?lhk='+appConnector.key()+'&type=timetable&daycode='+$daycode+'';
-				$ionicLoading.show();
-				if( !timetableCache.get( $daycode ) ) {
-					DataLoader.get( timetableApi ).then(function(response) {
-						$scope.classes = response.data.data;
-						
-						timetableCache.put( $daycode, response.data.data );
-						
-						$ionicLoading.hide();
-					}, function(response) {
-						$ionicLoading.hide();
-					});
-				} else {
-					$scope.classes = timetableCache.get( $daycode );
-					$ionicLoading.hide();
-				}
-			};
-		
 			$scope.iconClass =  function($id){
-				console.log($id);
 				$cordovaLocalNotification.isPresent($id).then(function (present) {
 					if (present) {
 						return "ion-android-notifications";
 					} else {
 						return "ion-android-notifications-none";
 					}
+					console.log(present);
 				});
 			};
 			
