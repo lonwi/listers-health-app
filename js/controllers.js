@@ -146,6 +146,7 @@
 			};
 		
 			$scope.iconClass =  function($id){
+				console.log($id);
 				$cordovaLocalNotification.isPresent($id).then(function (present) {
 					if (present) {
 						return "ion-android-notifications";
@@ -169,7 +170,6 @@
 					every: "week",
 				}).then(function (result) {
 					console.log("The notification has been set for "+  nextClass);
-					return result;
 				});
 			};
 			
@@ -196,7 +196,7 @@
 				$cordovaLocalNotification.isPresent($id).then(function (present) {
 					if (present) {
 						$cordovaLocalNotification.cancel($id).then(function (result) {
-							console.log('Notification '+$id+' Cancelled' + result);
+							console.log('Notification '+$id+' Cancelled: ' + result);
 						});
 					} else {
 						var nextClass = Date.parse($start+ ' '+$weekday);
@@ -211,7 +211,7 @@
 							title: "Class Reminder",
 							every: "week",
 						}).then(function (result) {
-							console.log("The notification has been set for "+  nextClass);
+							console.log("The notification has been set for "+  nextClass ": "+result);
 						});
 					}
 				});	
