@@ -211,7 +211,7 @@
 							title: "Class Reminder",
 							every: "week",
 						}).then(function (result) {
-							console.log("The notification has been set for "+  nextClass ": "+result);
+							console.log("The notification has been set for "+  nextClass +": "+result);
 						});
 					}
 				});	
