@@ -145,23 +145,27 @@
 		
 		$scope.iconClass =  function($id){
 			if ($scope.isPresent($id)) {
-				return "ion-android-favorite";
+				return "ion-android-notifications";
 			} else {
-				return "ion-android-favorite-outline";
+				return "ion-android-notifications-none";
 			}
 		};
 		
 		$scope.scheduleNotification = function($id, $class_id, $title, $start, $weekday) {
 			var nextClass = Date.parse($start+ ' '+$weekday);
 			nextClass = nextClass.addHours(-1);
+			if(Date.today() > nextClass){
+				nextClass = nextClass.addWeeks(1);
+			}			
 			console.log(nextClass);
 			$cordovaLocalNotification.schedule({
 				id: $id,
-				date: nextClass,
-				message: $title + " starts in hour.",
+				firstAt: nextClass,
+				text: $title + " starts in an hour.",
 				title: "Class Reminder",
+				every: "week",
 			}).then(function () {
-				console.log("The notification has been set");
+				console.log("The notification has been set for "+  nextClass);
 			});
 		};
 		
@@ -194,6 +198,8 @@
 				}
 			});
 		};
+		
+		
 	})
 	
 	.controller('ClassCtrl', function($scope, $rootScope, localClasses) {
