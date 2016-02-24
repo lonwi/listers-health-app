@@ -146,11 +146,13 @@
 			};
 		
 			$scope.iconClass =  function($id){
-				if ($scope.isScheduled($id)) {
-					return "ion-android-notifications";
-				} else {
-					return "ion-android-notifications-none";
-				}
+				$cordovaLocalNotification.isPresent($id).then(function (present) {
+					if (present) {
+						return "ion-android-notifications";
+					} else {
+						return "ion-android-notifications-none";
+					}
+				});
 			};
 			
 			$scope.scheduleNotification = function($id, $class_id, $title, $start, $weekday) {
@@ -191,11 +193,28 @@
 			};
 			
 			$scope.scheduleClassNotification = function ( $id, $class_id, $title, $start, $weekday) {
-				if ($scope.isScheduled($id)) {
-					$scope.cancelNotification($id, $class_id, $title, $start, $weekday);
-				} else {
-					$scope.scheduleNotification($id, $class_id, $title, $start, $weekday);
-				}
+				$cordovaLocalNotification.isPresent($id).then(function (present) {
+					if (present) {
+						$cordovaLocalNotification.cancel($id).then(function (result) {
+							console.log('Notification '+$id+' Cancelled' + result);
+						});
+					} else {
+						var nextClass = Date.parse($start+ ' '+$weekday);
+						nextClass = nextClass.addHours(-1);
+						if(Date.today() > nextClass){
+							nextClass = nextClass.addWeeks(1);
+						}			
+						$cordovaLocalNotification.schedule({
+							id: $id,
+							at: nextClass,
+							text: $title + " starts in an hour.",
+							title: "Class Reminder",
+							every: "week",
+						}).then(function (result) {
+							console.log("The notification has been set for "+  nextClass);
+						});
+					}
+				});	
 			};
 		});
 		
@@ -294,7 +313,9 @@
      
 		$ionicPlatform.ready(function () {
 			
-			$cordovaLocalNotification.getAll(function (notifications) { console.log(notifications);});
+			$cordovaLocalNotification.getAll().then(function(notification) {
+				console.log(JSON.stringify(notification));
+			});
 			 
 			$scope.scheduleSingleNotification = function () {
 			  $cordovaLocalNotification.schedule({
