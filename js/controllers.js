@@ -187,10 +187,10 @@
 		
 		$scope.scheduleClassNotification = function ( $id, $class_id, $title, $start, $weekday) {
 			$cordovaLocalNotification.isPresent($id).then(function (present) {
-				if (present) {
-					$scope.scheduleNotification($id, $class_id, $title, $start, $weekday);
-				} else {
+				if ($scope.isPresent($id)) {
 					$scope.cancelNotification($id, $class_id, $title, $start, $weekday);
+				} else {
+					$scope.scheduleNotification($id, $class_id, $title, $start, $weekday);
 				}
 			});
 		};
