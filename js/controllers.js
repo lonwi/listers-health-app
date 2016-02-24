@@ -144,8 +144,7 @@
 		};
 		
 		$scope.iconClass =  function($id){
-			var present = $scope.isPresent($id);
-			if (present) {
+			if ($scope.isPresent($id)) {
 				return "ion-android-favorite";
 			} else {
 				return "ion-android-favorite-outline";
@@ -163,22 +162,18 @@
 				title: "Class Reminder",
 			}).then(function () {
 				console.log("The notification has been set");
-				$scope.iconClass($id);
 			});
 		};
 		
 		$scope.cancelNotification = function($id, $class_id, $title, $start, $weekday) {
 			$cordovaLocalNotification.cancel($id).then(function (result) {
 				console.log('Notification '+$id+' Cancelled' + result);
-				$scope.iconClass($id);
 			});
 		};
 		
 		$scope.isPresent = function($id) {
 			if (window.cordova){
-				$cordovaLocalNotification.isPresent($id).then(function(isPresent) {
-					console.log('Notification '+$id+' is Present: ' + isPresent);
-				});
+				$cordovaLocalNotification.isPresent($id).then(function(isPresent) {});
 			}else{
 				return false; 
 			}
@@ -191,21 +186,13 @@
 		};
 		
 		$scope.scheduleClassNotification = function ( $id, $class_id, $title, $start, $weekday) {
-			
-			var present = $scope.isPresent($id);
-			//$cordovaLocalNotification.isPresent($id).then(function (present) {
+			$cordovaLocalNotification.isPresent($id).then(function (present) {
 				if (present) {
 					$scope.scheduleNotification($id, $class_id, $title, $start, $weekday);
 				} else {
 					$scope.cancelNotification($id, $class_id, $title, $start, $weekday);
 				}
-			//});
-
-			console.log('ID: '+$id);
-			console.log('Class ID: '+$class_id);
-			console.log('Title: '+$title);
-			console.log('Start: '+$start);
-			console.log('Weekday: '+$weekday);
+			});
 		};
 	})
 	
