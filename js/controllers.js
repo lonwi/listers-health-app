@@ -144,10 +144,15 @@
 		};
 		
 		$scope.scheduleClassNotification = function ($id, $name, $day, $time) {
+			if($cordovaLocalNotification.notification.local.isPresent($id)){
+				console.log('present');
+			}else{
+				console.log('not present');
+			}
 			console.log('ID: '+$id);
-			console.log('Name: '+$id);
-			console.log('Day: '+$id);
-			console.log('Time: '+$id);
+			console.log('Name: '+$name);
+			console.log('Day: '+$day);
+			console.log('Time: '+$time);
 		};
 	})
 	

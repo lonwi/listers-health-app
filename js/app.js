@@ -52,8 +52,7 @@
 				//StatusBar.styleDefault();
 			}
 				
-			//if(navigator.connection){
-				console.log('Connection:' +navigator.connection.type);	
+			if(navigator.connection){
 				if($cordovaNetwork.isOffline()){
 					$ionicPopup.confirm({
 						title: "No Internet Connection",
@@ -65,7 +64,7 @@
 						}
 					});
 				}
-			//}
+			}
 		});
 		
 		$ionicPlatform.on('resume', function(event) {
