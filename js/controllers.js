@@ -144,40 +144,44 @@
 		};
 		
 		$scope.iconClass =  function($id){
-			$cordovaLocalNotification.isPresent($id).then(function (present) {
-				if (present) {
-					return "ion-ios-alarm";
-				} else {
-					return "ion-ios-alarm-outline";
-				}
-			});
+			var present = $scope.isPresent($id);
+			if (present) {
+				return "ion-android-favorite";
+			} else {
+				return "ion-android-favorite-outline";
+			}
 		};
 		
-		$scope.addNotification = function($id, $name, $day, $time) {
-			var alarmTime = new Date();
-			alarmTime.setMinutes(alarmTime.getMinutes() + 1);
-			$cordovaLocalNotification.add({
+		$scope.scheduleNotification = function($id, $class_id, $title, $start, $weekday) {
+			var nextClass = Date.parse($start+ ' '+$weekday);
+			nextClass = nextClass.addHours(-1);
+			console.log(nextClass);
+			$cordovaLocalNotification.schedule({
 				id: $id,
-				date: alarmTime,
-				message: $name + " starts in hour.",
+				date: nextClass,
+				message: $title + " starts in hour.",
 				title: "Class Reminder",
-				autoCancel: true,
-				sound: null
 			}).then(function () {
 				console.log("The notification has been set");
+				$scope.iconClass($id);
 			});
 		};
 		
-		$scope.cancelNotification = function($id, $name, $day, $time) {
+		$scope.cancelNotification = function($id, $class_id, $title, $start, $weekday) {
 			$cordovaLocalNotification.cancel($id).then(function (result) {
 				console.log('Notification '+$id+' Cancelled' + result);
+				$scope.iconClass($id);
 			});
 		};
 		
 		$scope.isPresent = function($id) {
-			$cordovaLocalNotification.isPresent($id).then(function(isPresent) {
-				console.log('Notification '+$id+' is Present: ' + isPresent);
-			});
+			if (window.cordova){
+				$cordovaLocalNotification.isPresent($id).then(function(isPresent) {
+					console.log('Notification '+$id+' is Present: ' + isPresent);
+				});
+			}else{
+				return false; 
+			}
 		};
 		
 		$scope.isScheduled = function($id) {
@@ -186,19 +190,22 @@
 			});
 		};
 		
-		$scope.scheduleClassNotification = function ( $id, $name, $day, $time) {
-			console.log('Click');
-			$cordovaLocalNotification.isPresent($id).then(function (present) {
+		$scope.scheduleClassNotification = function ( $id, $class_id, $title, $start, $weekday) {
+			
+			var present = $scope.isPresent($id);
+			//$cordovaLocalNotification.isPresent($id).then(function (present) {
 				if (present) {
-					$scope.addNotification($id, $name, $day, $time);
+					$scope.scheduleNotification($id, $class_id, $title, $start, $weekday);
 				} else {
-					$scope.addNotification($id, $name, $day, $time);
+					$scope.cancelNotification($id, $class_id, $title, $start, $weekday);
 				}
-			});
+			//});
+
 			console.log('ID: '+$id);
-			console.log('Name: '+$name);
-			console.log('Day: '+$day);
-			console.log('Time: '+$time);
+			console.log('Class ID: '+$class_id);
+			console.log('Title: '+$title);
+			console.log('Start: '+$start);
+			console.log('Weekday: '+$weekday);
 		};
 	})
 	
@@ -281,7 +288,14 @@
     
 	})
 	
-	.controller('SettingsCtrl', function($scope, $rootScope) {
+	.controller('SettingsCtrl', function($scope, $rootScope, $cordovaLocalNotification, $ionicPopup) {
+		
+		
+		$scope.cancelAllClassNotification = function () {
+			$cordovaLocalNotification.cancelAll(function() {
+				console.log("All notifications are cleared");
+			}, this);
+		};
 
 	})
 	
