@@ -155,7 +155,6 @@
 						return "ion-android-notifications-none";
 					}
 				});
-				return "ion-android-notifications-none";
 			};
 			
 			$scope.scheduleNotification = function($id, $class_id, $title, $start, $weekday) {
