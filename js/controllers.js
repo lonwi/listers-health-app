@@ -145,14 +145,14 @@
 		
 		$ionicPlatform.ready(function () {
 			
-			$scope.iconClass =  function($id){
-				$cordovaLocalNotification.isPresent($id).then(function (present) {
-					if (present) {
+			$scope.iconClass = function($id){
+				$cordovaLocalNotification.isPresent($id).then(function(isPresent) {
+					console.log(isPresent);
+					if (isPresent) {
 						return "ion-android-notifications";
 					} else {
 						return "ion-android-notifications-none";
 					}
-					console.log(present);
 				});
 			};
 			
