@@ -117,8 +117,8 @@
 		};
 	})
 	
-	.controller('TimetableCtrl', function($scope, $rootScope, $ionicPlatform, DataLoader, $http, $ionicLoading, $timeout, CacheFactory, $cordovaLocalNotification, appConnector) {
-		
+	.controller('TimetableCtrl', function($scope, $rootScope, $ionicPlatform, DataLoader, $http, $ionicLoading, $timeout, CacheFactory, $cordovaLocalNotification, $ionicPopup, appConnector) {
+	
 		if ( ! CacheFactory.get('timetableCache') ) {
 			CacheFactory.createCache('timetableCache');
 		}
@@ -143,12 +143,57 @@
 			}
 		};
 		
-		$scope.scheduleClassNotification = function ($id, $name, $day, $time) {
-			if($cordovaLocalNotification.notification.local.isPresent($id)){
-				console.log('present');
-			}else{
-				console.log('not present');
-			}
+		$scope.iconClass =  function($id){
+			$cordovaLocalNotification.isPresent($id).then(function (present) {
+				if (present) {
+					return "ion-ios-alarm";
+				} else {
+					return "ion-ios-alarm-outline";
+				}
+			});
+		};
+		
+		$scope.addNotification = function($id, $name, $day, $time) {
+			var alarmTime = new Date();
+			alarmTime.setMinutes(alarmTime.getMinutes() + 1);
+			$cordovaLocalNotification.add({
+				id: $id,
+				date: alarmTime,
+				message: $name + " starts in hour.",
+				title: "Class Reminder",
+				autoCancel: true,
+				sound: null
+			}).then(function () {
+				console.log("The notification has been set");
+			});
+		};
+		
+		$scope.cancelNotification = function($id, $name, $day, $time) {
+			$cordovaLocalNotification.cancel($id).then(function (result) {
+				console.log('Notification '+$id+' Cancelled' + result);
+			});
+		};
+		
+		$scope.isPresent = function($id) {
+			$cordovaLocalNotification.isPresent($id).then(function(isPresent) {
+				console.log('Notification '+$id+' is Present: ' + isPresent);
+			});
+		};
+		
+		$scope.isScheduled = function($id) {
+			$cordovaLocalNotification.isScheduled($id).then(function(isScheduled) {
+				console.log('Notification '+$id+' Scheduled: ' + isScheduled);
+			});
+		};
+		
+		$scope.scheduleClassNotification = function ( $id, $name, $day, $time) {
+			$cordovaLocalNotification.isPresent($id).then(function (present) {
+				if (present) {
+					$scope.addNotification($id, $name, $day, $time);
+				} else {
+					$scope.addNotification($id, $name, $day, $time);
+				}
+			});
 			console.log('ID: '+$id);
 			console.log('Name: '+$name);
 			console.log('Day: '+$day);

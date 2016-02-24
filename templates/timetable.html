@@ -9,7 +9,7 @@
                         <ion-item ng-repeat="class in classes" class="item-icon-right">
                         	<h2>{{class.title}}</h2>
                 			<h4>{{class.start}} - {{class.end}}</h4>
-                            <i class="icon ion-ios-alarm-outline" ng-click="scheduleClassNotification(class.id, class.class_id, class.title, class.start, class.weekday)"></i>
+                            <i class="icon" ng-class="iconClass(class.id)" ng-click="scheduleClassNotification(class.id, class.class_id, class.title, class.start, class.weekday)"></i>
                         </ion-item>
                     </ion-list>
                 </ion-content>
