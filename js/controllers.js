@@ -147,13 +147,15 @@
 			
 			$scope.iconClass = function($id){
 				$cordovaLocalNotification.isPresent($id).then(function(isPresent) {
-					console.log(isPresent);
-					if (isPresent) {
+					if (isPresent == true) {
+						console.log(isPresent);
 						return "ion-android-notifications";
 					} else {
+						console.log(isPresent);
 						return "ion-android-notifications-none";
 					}
 				});
+				return "ion-android-notifications-none";
 			};
 			
 			$scope.scheduleNotification = function($id, $class_id, $title, $start, $weekday) {
