@@ -119,82 +119,85 @@
 	
 	.controller('TimetableCtrl', function($scope, $rootScope, $ionicPlatform, DataLoader, $http, $ionicLoading, $timeout, CacheFactory, $cordovaLocalNotification, $ionicPopup, appConnector) {
 	
-		if ( ! CacheFactory.get('timetableCache') ) {
-			CacheFactory.createCache('timetableCache');
-		}
-		var timetableCache = CacheFactory.get( 'timetableCache' );
-
-		$scope.loadTimetable = function($daycode) {
-			var timetableApi = appConnector.url()+'?lhk='+appConnector.key()+'&type=timetable&daycode='+$daycode+'';
-			$ionicLoading.show();
-			if( !timetableCache.get( $daycode ) ) {
-				DataLoader.get( timetableApi ).then(function(response) {
-					$scope.classes = response.data.data;
-					
-					timetableCache.put( $daycode, response.data.data );
-					
+		$ionicPlatform.ready(function () {
+			
+			if ( ! CacheFactory.get('timetableCache') ) {
+				CacheFactory.createCache('timetableCache');
+			}
+			var timetableCache = CacheFactory.get( 'timetableCache' );
+	
+			$scope.loadTimetable = function($daycode) {
+				var timetableApi = appConnector.url()+'?lhk='+appConnector.key()+'&type=timetable&daycode='+$daycode+'';
+				$ionicLoading.show();
+				if( !timetableCache.get( $daycode ) ) {
+					DataLoader.get( timetableApi ).then(function(response) {
+						$scope.classes = response.data.data;
+						
+						timetableCache.put( $daycode, response.data.data );
+						
+						$ionicLoading.hide();
+					}, function(response) {
+						$ionicLoading.hide();
+					});
+				} else {
+					$scope.classes = timetableCache.get( $daycode );
 					$ionicLoading.hide();
-				}, function(response) {
-					$ionicLoading.hide();
+				}
+			};
+		
+			$scope.iconClass =  function($id){
+				if ($scope.isScheduled($id)) {
+					return "ion-android-notifications";
+				} else {
+					return "ion-android-notifications-none";
+				}
+			};
+			
+			$scope.scheduleNotification = function($id, $class_id, $title, $start, $weekday) {
+				var nextClass = Date.parse($start+ ' '+$weekday);
+				nextClass = nextClass.addHours(-1);
+				if(Date.today() > nextClass){
+					nextClass = nextClass.addWeeks(1);
+				}			
+				$cordovaLocalNotification.schedule({
+					id: $id,
+					at: nextClass,
+					text: $title + " starts in an hour.",
+					title: "Class Reminder",
+					every: "week",
+				}).then(function (result) {
+					console.log("The notification has been set for "+  nextClass);
+					return result;
 				});
-			} else {
-				$scope.classes = timetableCache.get( $daycode );
-				$ionicLoading.hide();
-			}
-		};
-		
-		$scope.iconClass =  function($id){
-			if ($scope.isScheduled($id)) {
-				return "ion-android-notifications";
-			} else {
-				return "ion-android-notifications-none";
-			}
-		};
-		
-		$scope.scheduleNotification = function($id, $class_id, $title, $start, $weekday) {
-			var nextClass = Date.parse($start+ ' '+$weekday);
-			nextClass = nextClass.addHours(-1);
-			if(Date.today() > nextClass){
-				nextClass = nextClass.addWeeks(1);
-			}			
-			$cordovaLocalNotification.schedule({
-				id: $id,
-				at: nextClass,
-				text: $title + " starts in an hour.",
-				title: "Class Reminder",
-				every: "week",
-			}).then(function (result) {
-				console.log("The notification has been set for "+  nextClass);
-				return result;
-			});
-		};
-		
-		$scope.cancelNotification = function($id, $class_id, $title, $start, $weekday) {
-			$cordovaLocalNotification.cancel($id).then(function (result) {
-				console.log('Notification '+$id+' Cancelled' + result);
-				return result;
-			});
-		};
-		
-		$scope.isPresent = function($id) {
-			$cordovaLocalNotification.isPresent($id).then(function(isPresent) {
-				return isPresent;
-			});
-		};
-		
-		$scope.isScheduled = function($id) {
-			$cordovaLocalNotification.isScheduled($id).then(function(isScheduled) {
-				return isScheduled;
-			});
-		};
-		
-		$scope.scheduleClassNotification = function ( $id, $class_id, $title, $start, $weekday) {
-			if ($scope.isScheduled($id)) {
-				$scope.cancelNotification($id, $class_id, $title, $start, $weekday);
-			} else {
-				$scope.scheduleNotification($id, $class_id, $title, $start, $weekday);
-			}
-		};
+			};
+			
+			$scope.cancelNotification = function($id, $class_id, $title, $start, $weekday) {
+				$cordovaLocalNotification.cancel($id).then(function (result) {
+					console.log('Notification '+$id+' Cancelled' + result);
+					return result;
+				});
+			};
+			
+			$scope.isPresent = function($id) {
+				$cordovaLocalNotification.isPresent($id).then(function(isPresent) {
+					return isPresent;
+				});
+			};
+			
+			$scope.isScheduled = function($id) {
+				$cordovaLocalNotification.isScheduled($id).then(function(isScheduled) {
+					return isScheduled;
+				});
+			};
+			
+			$scope.scheduleClassNotification = function ( $id, $class_id, $title, $start, $weekday) {
+				if ($scope.isScheduled($id)) {
+					$scope.cancelNotification($id, $class_id, $title, $start, $weekday);
+				} else {
+					$scope.scheduleNotification($id, $class_id, $title, $start, $weekday);
+				}
+			};
+		});
 		
 	})
 	
@@ -278,7 +281,6 @@
 	})
 	
 	.controller('SettingsCtrl', function($scope, $rootScope, $cordovaLocalNotification, $ionicPopup) {
-		
 		
 		$scope.cancelAllClassNotification = function () {
 			$cordovaLocalNotification.cancelAll(function() {
