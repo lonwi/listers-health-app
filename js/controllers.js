@@ -163,37 +163,38 @@
 				text: $title + " starts in an hour.",
 				title: "Class Reminder",
 				every: "week",
-			}).then(function () {
+			}).then(function (result) {
 				console.log("The notification has been set for "+  nextClass);
+				return result;
 			});
 		};
 		
 		$scope.cancelNotification = function($id, $class_id, $title, $start, $weekday) {
 			$cordovaLocalNotification.cancel($id).then(function (result) {
 				console.log('Notification '+$id+' Cancelled' + result);
+				return result;
 			});
 		};
 		
 		$scope.isPresent = function($id) {
-			$cordovaLocalNotification.isPresent($id).then(function(isPresent) {});
+			$cordovaLocalNotification.isPresent($id).then(function(isPresent) {
+				return isPresent;
+			});
 		};
 		
 		$scope.isScheduled = function($id) {
 			$cordovaLocalNotification.isScheduled($id).then(function(isScheduled) {
-				console.log('Notification '+$id+' Scheduled: ' + isScheduled);
+				return isScheduled;
 			});
 		};
 		
 		$scope.scheduleClassNotification = function ( $id, $class_id, $title, $start, $weekday) {
-			$cordovaLocalNotification.isScheduled($id).then(function (present) {
-				if (present) {
-					$scope.cancelNotification($id, $class_id, $title, $start, $weekday);
-				} else {
-					$scope.scheduleNotification($id, $class_id, $title, $start, $weekday);
-				}
-			});
+			if ($scope.isScheduled($id)) {
+				$scope.cancelNotification($id, $class_id, $title, $start, $weekday);
+			} else {
+				$scope.scheduleNotification($id, $class_id, $title, $start, $weekday);
+			}
 		};
-		
 		
 	})
 	
@@ -290,6 +291,8 @@
 	.controller('NotificationController', function($scope, $cordovaLocalNotification, $ionicPlatform) {
      
 		$ionicPlatform.ready(function () {
+			
+			$cordovaLocalNotification.getAll(function (notifications) { console.log(notifications);});
 			 
 			$scope.scheduleSingleNotification = function () {
 			  $cordovaLocalNotification.schedule({
