@@ -144,7 +144,7 @@
 		};
 		
 		$scope.iconClass =  function($id){
-			if ($scope.isPresent($id)) {
+			if ($scope.isScheduled($id)) {
 				return "ion-android-notifications";
 			} else {
 				return "ion-android-notifications-none";
@@ -157,7 +157,6 @@
 			if(Date.today() > nextClass){
 				nextClass = nextClass.addWeeks(1);
 			}			
-			console.log(nextClass);
 			$cordovaLocalNotification.schedule({
 				id: $id,
 				at: nextClass,
@@ -186,8 +185,8 @@
 		};
 		
 		$scope.scheduleClassNotification = function ( $id, $class_id, $title, $start, $weekday) {
-			$cordovaLocalNotification.isPresent($id).then(function (present) {
-				if ($scope.isPresent($id)) {
+			$cordovaLocalNotification.isScheduled($id).then(function (present) {
+				if (present) {
 					$scope.cancelNotification($id, $class_id, $title, $start, $weekday);
 				} else {
 					$scope.scheduleNotification($id, $class_id, $title, $start, $weekday);
