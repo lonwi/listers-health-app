@@ -187,6 +187,7 @@
 		};
 		
 		$scope.scheduleClassNotification = function ( $id, $name, $day, $time) {
+			console.log('Click');
 			$cordovaLocalNotification.isPresent($id).then(function (present) {
 				if (present) {
 					$scope.addNotification($id, $name, $day, $time);
