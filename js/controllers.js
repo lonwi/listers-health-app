@@ -160,7 +160,7 @@
 			console.log(nextClass);
 			$cordovaLocalNotification.schedule({
 				id: $id,
-				firstAt: nextClass,
+				at: nextClass,
 				text: $title + " starts in an hour.",
 				title: "Class Reminder",
 				every: "week",
@@ -176,11 +176,7 @@
 		};
 		
 		$scope.isPresent = function($id) {
-			if (window.cordova){
-				$cordovaLocalNotification.isPresent($id).then(function(isPresent) {});
-			}else{
-				return false; 
-			}
+			$cordovaLocalNotification.isPresent($id).then(function(isPresent) {});
 		};
 		
 		$scope.isScheduled = function($id) {
@@ -348,7 +344,12 @@
 			  $cordovaLocalNotification.cancel(3).then(function (result) {
 				console.log('Notification 3 Canceled');
 			  });
-			};      
+			};
+			$scope.cancelAllNotification  = function () {
+			  $cordovaLocalNotification.cancelAll.then(function (result) {
+				console.log('Notification 3 Canceled');
+			  });
+			};  
 			 
 		});
 	});
