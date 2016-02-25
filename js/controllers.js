@@ -147,15 +147,12 @@
 			
 			$scope.iconClass = function($id){
 				$cordovaLocalNotification.isPresent($id).then(function(isPresent) {
-					return isPresent;
-					/*
 					if (isPresent == true) {
 						console.log(isPresent);
 						return "ion-android-notifications";
 					} else {
 						return "ion-android-notifications-none";
 					}
-					*/
 				});
 			};
 			
@@ -179,19 +176,16 @@
 			$scope.cancelNotification = function($id, $class_id, $title, $start, $weekday) {
 				$cordovaLocalNotification.cancel($id).then(function (result) {
 					console.log('Notification '+$id+' Cancelled' + result);
-					return result;
 				});
 			};
 			
 			$scope.isPresent = function($id) {
 				$cordovaLocalNotification.isPresent($id).then(function(isPresent) {
-					return isPresent;
 				});
 			};
 			
 			$scope.isScheduled = function($id) {
 				$cordovaLocalNotification.isScheduled($id).then(function(isScheduled) {
-					return isScheduled;
 				});
 			};
 			
