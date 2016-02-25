@@ -145,10 +145,11 @@
 		
 		$scope.iconClass = function($id){
 			$cordovaLocalNotification.isPresent($id).then(function(isPresent) {
+				return "ion-android-notifications";
 				if (isPresent) {
-					return "button button-icon icon ion-android-notifications";
+					return "ion-android-notifications";
 				} else {
-					return "button button-icon icon ion-android-notifications-none";
+					return "ion-android-notifications-none";
 				}
 			});
 		};
@@ -207,6 +208,32 @@
 							title: "Class Reminder",
 							every: "week",
 						}).then(function (result) {
+							console.log("The notification has been set for "+  nextClass +": "+result);
+						});
+					}
+				});	
+			};
+			
+			$scope.scheduleClassNotification1 = function (item) {
+				$cordovaLocalNotification.isPresent(item.id).then(function (present) {
+					if (present) {
+						$cordovaLocalNotification.cancel(item.id).then(function (result) {
+							console.log('Notification '+item.id+' Cancelled: ' + result);
+						});
+					} else {
+						var nextClass = Date.parse(item.start+ ' '+item.weekday);
+						nextClass = nextClass.addHours(-1);
+						if(Date.today() > nextClass){
+							nextClass = nextClass.addWeeks(1);
+						}			
+						$cordovaLocalNotification.schedule({
+							id: item.id,
+							at: nextClass,
+							text: item.title + " starts in an hour.",
+							title: "Class Reminder",
+							every: "week",
+						}).then(function (result) {
+							item.added = true;
 							console.log("The notification has been set for "+  nextClass +": "+result);
 						});
 					}
