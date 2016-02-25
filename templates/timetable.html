@@ -6,7 +6,7 @@
         	<ion-nav-view name="tab-monday">
             	<ion-content padding="true" has-header="true" class="has-footer">
                     <ion-list>
-                        <ion-item ng-repeat="class in classes" item="class" class="item-icon-right" ng-click="scheduleClassNotification(class.id, class.class_id, class.title, class.start, class.weekday)" ng-init="buttonClass(class)">
+                        <ion-item ng-repeat="class in classes" item="class" class="item-icon-right" ng-init="buttonClass(class)">
                         	<h2>{{class.title}}</h2>
                 			<h4>{{class.start}} - {{class.end}}</h4>
                             <button class="button button-icon icon" ng-class="class.added ? 'ion-android-notifications' : 'ion-android-notifications-none'" ng-click="scheduleClassNotification(class)"></button>
@@ -20,7 +20,7 @@
         	<ion-nav-view name="tab-tuesday">
             	<ion-content padding="true" has-header="true" class="has-footer">
                     <ion-list>
-                        <ion-item ng-repeat="class in classes" item="class" class="item-icon-right" ng-click="scheduleClassNotification(class.id, class.class_id, class.title, class.start, class.weekday)" ng-init="buttonClass(class)">
+                        <ion-item ng-repeat="class in classes" item="class" class="item-icon-right" ng-init="buttonClass(class)">
                         	<h2>{{class.title}}</h2>
                 			<h4>{{class.start}} - {{class.end}}</h4>
                             <button class="button button-icon icon" ng-class="class.added ? 'ion-android-notifications' : 'ion-android-notifications-none'" ng-click="scheduleClassNotification(class)"></button>
@@ -34,7 +34,7 @@
         	<ion-nav-view name="tab-wednesday">
             	<ion-content padding="true" has-header="true" class="has-footer">
                     <ion-list>
-                        <ion-item ng-repeat="class in classes" item="class" class="item-icon-right" ng-click="scheduleClassNotification(class.id, class.class_id, class.title, class.start, class.weekday)" ng-init="buttonClass(class)">
+                        <ion-item ng-repeat="class in classes" item="class" class="item-icon-right" ng-init="buttonClass(class)">
                         	<h2>{{class.title}}</h2>
                 			<h4>{{class.start}} - {{class.end}}</h4>
                             <button class="button button-icon icon" ng-class="class.added ? 'ion-android-notifications' : 'ion-android-notifications-none'" ng-click="scheduleClassNotification(class)"></button>
@@ -48,7 +48,7 @@
         	<ion-nav-view name="tab-thursday">
             	<ion-content padding="true" has-header="true" class="has-footer">
                     <ion-list>
-                        <ion-item ng-repeat="class in classes" item="class" class="item-icon-right" ng-click="scheduleClassNotification(class.id, class.class_id, class.title, class.start, class.weekday)" ng-init="buttonClass(class)">
+                        <ion-item ng-repeat="class in classes" item="class" class="item-icon-right" ng-init="buttonClass(class)">
                         	<h2>{{class.title}}</h2>
                 			<h4>{{class.start}} - {{class.end}}</h4>
                             <button class="button button-icon icon" ng-class="class.added ? 'ion-android-notifications' : 'ion-android-notifications-none'" ng-click="scheduleClassNotification(class)"></button>
@@ -62,7 +62,7 @@
         	<ion-nav-view name="tab-friday">
             	<ion-content padding="true" has-header="true" class="has-footer">
                     <ion-list>
-                        <ion-item ng-repeat="class in classes" item="class" class="item-icon-right" ng-click="scheduleClassNotification(class.id, class.class_id, class.title, class.start, class.weekday)" ng-init="buttonClass(class)">
+                        <ion-item ng-repeat="class in classes" item="class" class="item-icon-right" ng-init="buttonClass(class)">
                         	<h2>{{class.title}}</h2>
                 			<h4>{{class.start}} - {{class.end}}</h4>
                             <button class="button button-icon icon" ng-class="class.added ? 'ion-android-notifications' : 'ion-android-notifications-none'" ng-click="scheduleClassNotification(class)"></button>
@@ -76,7 +76,7 @@
         	<ion-nav-view name="tab-saturday">
             	<ion-content padding="true" has-header="true" class="has-footer">
                     <ion-list>
-                        <ion-item ng-repeat="class in classes" item="class" class="item-icon-right" ng-click="scheduleClassNotification(class.id, class.class_id, class.title, class.start, class.weekday)" ng-init="buttonClass(class)">
+                        <ion-item ng-repeat="class in classes" item="class" class="item-icon-right" ng-init="buttonClass(class)">
                         	<h2>{{class.title}}</h2>
                 			<h4>{{class.start}} - {{class.end}}</h4>
                             <button class="button button-icon icon" ng-class="class.added ? 'ion-android-notifications' : 'ion-android-notifications-none'" ng-click="scheduleClassNotification(class)"></button>
@@ -90,7 +90,7 @@
         	<ion-nav-view name="tab-sunday">
             	<ion-content padding="true" has-header="true" class="has-footer">
                     <ion-list>
-                        <ion-item ng-repeat="class in classes" item="class" class="item-icon-right" ng-click="scheduleClassNotification(class.id, class.class_id, class.title, class.start, class.weekday)" ng-init="buttonClass(class)">
+                        <ion-item ng-repeat="class in classes" item="class" class="item-icon-right" ng-init="buttonClass(class)">
                         	<h2>{{class.title}}</h2>
                 			<h4>{{class.start}} - {{class.end}}</h4>
                             <button class="button button-icon icon" ng-class="class.added ? 'ion-android-notifications' : 'ion-android-notifications-none'" ng-click="scheduleClassNotification(class)"></button>
