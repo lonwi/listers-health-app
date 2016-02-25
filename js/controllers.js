@@ -156,6 +156,16 @@
 		
 		$ionicPlatform.ready(function () {
 			
+			$scope.buttonClass = function(item){
+				$cordovaLocalNotification.isPresent(item.id).then(function(isPresent) {
+					if (isPresent) {
+						item.added = true;
+					} else {
+						item.added = false;
+					}
+				});
+			};
+			
 			$scope.scheduleNotification = function($id, $class_id, $title, $start, $weekday) {
 				var nextClass = Date.parse($start+ ' '+$weekday);
 				nextClass = nextClass.addHours(-1);
@@ -219,6 +229,7 @@
 					if (present) {
 						$cordovaLocalNotification.cancel(item.id).then(function (result) {
 							console.log('Notification '+item.id+' Cancelled: ' + result);
+							item.added = false;
 						});
 					} else {
 						var nextClass = Date.parse(item.start+ ' '+item.weekday);
