@@ -143,17 +143,17 @@
 			}
 		};
 		
+		$scope.iconClass = function($id){
+			$cordovaLocalNotification.isPresent($id).then(function(isPresent) {
+				if (isPresent) {
+					return "button button-icon icon ion-android-notifications";
+				} else {
+					return "button button-icon icon ion-android-notifications-none";
+				}
+			});
+		};
+		
 		$ionicPlatform.ready(function () {
-			
-			$scope.iconClass = function($id){
-				$cordovaLocalNotification.isPresent($id).then(function(isPresent) {
-					if (isPresent == true) {
-						return "button button-icon icon ion-android-notifications";
-					} else {
-						return "button button-icon icon ion-android-notifications-none";
-					}
-				});
-			};
 			
 			$scope.scheduleNotification = function($id, $class_id, $title, $start, $weekday) {
 				var nextClass = Date.parse($start+ ' '+$weekday);

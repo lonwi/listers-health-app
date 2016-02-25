@@ -226,7 +226,7 @@
 	
 	.constant('$ionicLoadingConfig', {
 		template: '<ion-spinner icon="android" class="spinner-balanced"></ion-spinner>',
-		noBackdrop: true,
+		noBackdrop: false,
 	})
 	
 	;
