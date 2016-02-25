@@ -148,10 +148,9 @@
 			$scope.iconClass = function($id){
 				$cordovaLocalNotification.isPresent($id).then(function(isPresent) {
 					if (isPresent == true) {
-						console.log(isPresent);
-						return "ion-android-notifications";
+						return "button button-icon icon ion-android-notifications";
 					} else {
-						return "ion-android-notifications-none";
+						return "button button-icon icon ion-android-notifications-none";
 					}
 				});
 			};
@@ -166,7 +165,7 @@
 					id: $id,
 					at: nextClass,
 					text: $title + " starts in an hour.",
-					title: "Class Reminder",
+					title: "Listers Health Class Reminder",
 					every: "week",
 				}).then(function (result) {
 					console.log("The notification has been set for "+  nextClass);
