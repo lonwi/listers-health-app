@@ -143,17 +143,6 @@
 			}
 		};
 		
-		$scope.iconClass = function($id){
-			$cordovaLocalNotification.isPresent($id).then(function(isPresent) {
-				return "ion-android-notifications";
-				if (isPresent) {
-					return "ion-android-notifications";
-				} else {
-					return "ion-android-notifications-none";
-				}
-			});
-		};
-		
 		$ionicPlatform.ready(function () {
 			
 			$scope.buttonClass = function(item){
@@ -199,54 +188,46 @@
 				});
 			};
 			
-			$scope.scheduleClassNotification = function ( $id, $class_id, $title, $start, $weekday) {
-				$cordovaLocalNotification.isPresent($id).then(function (present) {
-					if (present) {
-						$cordovaLocalNotification.cancel($id).then(function (result) {
-							console.log('Notification '+$id+' Cancelled: ' + result);
-						});
-					} else {
-						var nextClass = Date.parse($start+ ' '+$weekday);
-						nextClass = nextClass.addHours(-1);
-						if(Date.today() > nextClass){
-							nextClass = nextClass.addWeeks(1);
-						}			
-						$cordovaLocalNotification.schedule({
-							id: $id,
-							at: nextClass,
-							text: $title + " starts in an hour.",
-							title: "Class Reminder",
-							every: "week",
-						}).then(function (result) {
-							console.log("The notification has been set for "+  nextClass +": "+result);
-						});
-					}
-				});	
-			};
-			
-			$scope.scheduleClassNotification1 = function (item) {
+			$scope.scheduleClassNotification = function (item) {
 				$cordovaLocalNotification.isPresent(item.id).then(function (present) {
 					if (present) {
-						$cordovaLocalNotification.cancel(item.id).then(function (result) {
-							console.log('Notification '+item.id+' Cancelled: ' + result);
-							item.added = false;
+						$ionicPopup.confirm({
+							title: "Remove Class Reminder",
+							content: "Are you sure that you want to remove this reminder?"
+						})
+						.then(function(result) {
+							if(result) {
+								$cordovaLocalNotification.cancel(item.id).then(function (result) {
+									console.log('Notification '+item.id+' Cancelled: ' + result);
+									item.added = false;
+								});
+							}
 						});
+						
 					} else {
-						var nextClass = Date.parse(item.start+ ' '+item.weekday);
-						nextClass = nextClass.addHours(-1);
-						if(Date.today() > nextClass){
-							nextClass = nextClass.addWeeks(1);
-						}			
-						$cordovaLocalNotification.schedule({
-							id: item.id,
-							at: nextClass,
-							text: item.title + " starts in an hour.",
-							title: "Class Reminder",
-							every: "week",
-						}).then(function (result) {
-							item.added = true;
-							console.log("The notification has been set for "+  nextClass +": "+result);
-						});
+						$ionicPopup.confirm({
+							title: "Add Class Reminder",
+							content: "Are you sure that you want to set reminder for "+item.title+"?"
+						})
+						.then(function(result) {
+							if(result) {
+								var nextClass = Date.parse(item.start+ ' '+item.weekday);
+								nextClass = nextClass.addHours(-1);
+								if(Date.today() > nextClass){
+									nextClass = nextClass.addWeeks(1);
+								}			
+								$cordovaLocalNotification.schedule({
+									id: item.id,
+									at: nextClass,
+									text: item.title + " starts in an hour.",
+									title: "Listers Health Class Reminder",
+									every: "week",
+								}).then(function (result) {
+									item.added = true;
+									console.log("The notification has been set for "+  nextClass +": "+result);
+								});
+							}
+						});	
 					}
 				});	
 			};
@@ -333,14 +314,21 @@
     
 	})
 	
-	.controller('SettingsCtrl', function($scope, $rootScope, $cordovaLocalNotification, $ionicPopup) {
-		
-		$scope.cancelAllClassNotification = function () {
-			$cordovaLocalNotification.cancelAll(function() {
-				console.log("All notifications are cleared");
-			}, this);
-		};
-
+	.controller('SettingsCtrl', function($scope, $rootScope, $ionicPlatform, $cordovaLocalNotification, $ionicPopup) {
+		$ionicPlatform.ready(function () {
+			
+			$scope.cancelAllClassNotification = function () {
+				$cordovaLocalNotification.cancelAll(function() {
+					console.log("All notifications are cleared");
+				}, this);
+			};
+			
+			$cordovaLocalNotification.getAll().then(function(notification) {
+				console.log(JSON.stringify(notification));
+			});
+			
+			
+		});
 	})
 	
 	.controller('NotificationController', function($scope, $cordovaLocalNotification, $ionicPlatform) {
